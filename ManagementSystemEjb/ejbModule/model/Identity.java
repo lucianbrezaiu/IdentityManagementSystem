@@ -30,7 +30,7 @@ public class Identity implements Serializable {
 
 	//bi-directional many-to-one association to Organization
 	@ManyToOne
-	@JoinColumn(name="organisationId")
+	@JoinColumn(name="organizationId")
 	private Organization organization;
 
 	//bi-directional many-to-one association to Identityroleresource
