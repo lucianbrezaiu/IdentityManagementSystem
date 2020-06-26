@@ -16,7 +16,7 @@ import bean.LoginBean;
 @WebFilter("/adminFilter/*")
 public class AdminFilter implements Filter {
 
-	public static final String AUTHENTICATED_USER_MAIN_PAGE = "/authenticatedUserFilter/user.xhtml";
+	public static final String AUTHENTICATED_USER_MAIN_PAGE = "/userFilter/user.xhtml";
 
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
