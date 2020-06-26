@@ -64,7 +64,6 @@ CREATE TABLE `identityroleresource` (
 )
 
 insert into organization(organizationName,cui) values 
-('IDP','11292786'),
 ('IBM','34318904'),
 ('Atos','98066608'),
 ('Waters','26167770'),
@@ -74,7 +73,8 @@ insert into organization(organizationName,cui) values
 ('Essensys','59753264');
 
 insert into identity(organizationId,username,email,password,firstName,lastName) values
-(1,'admin','admin@outlook.com','Copernic@1234','admin','admin');
+(1,'admin','admin@outlook.com','Copernic@1234','admin','admin'),
+(7,'luci.brezaiu','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu');
 
 insert into role(roleName,roleDescription) values
 ('admin','administrator');

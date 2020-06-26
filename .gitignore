@@ -1,1 +1,3 @@
-.project
+./ManagementSystemEjb/build
+./ManagementSystemEjbClient/build
+./ManagementSystemWeb/build
