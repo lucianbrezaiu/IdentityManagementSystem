@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Identity.findAll", query="SELECT i FROM Identity i")
+@NamedQuery(name = "findIdentityByUsername", query = "SELECT i FROM Identity i WHERE i.username = :username")
 public class Identity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -37,9 +38,16 @@ public class Identity implements Serializable {
 	@OneToMany(mappedBy="identity")
 	private List<Identityroleresource> identityroleresources;
 
+	
 	public Identity() {
 	}
 
+	public Identity(String password, String username) {
+		super();
+		this.password = password;
+		this.username = username;
+	}
+	
 	public int getIdentityId() {
 		return this.identityId;
 	}

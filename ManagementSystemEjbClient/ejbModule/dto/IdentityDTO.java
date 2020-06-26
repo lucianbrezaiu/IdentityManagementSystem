@@ -2,13 +2,13 @@ package dto;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable {
+public class IdentityDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String username;
 	private String password;
 
-	public UserDTO() {
+	public IdentityDTO() {
 		super();
 	}
 
@@ -36,7 +36,7 @@ public class UserDTO implements Serializable {
 		this.password = password;
 	}
 
-	public UserDTO(String username, String password) {
+	public IdentityDTO(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
