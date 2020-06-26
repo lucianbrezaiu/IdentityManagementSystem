@@ -24,4 +24,4 @@ Pași pentru a rula proiectul:
 4. selectez serverul Glassfish care a fost anterior configurat în eclipse
 5. Finish.
 6. După ce serverul pornește și face deploy cu succes, aplicația este disponibilă
-la adresa: http://localhost:8080/ManagementSystemWeb/index.xhtml
+la adresa: http://localhost:8080/ManagementSystemWeb

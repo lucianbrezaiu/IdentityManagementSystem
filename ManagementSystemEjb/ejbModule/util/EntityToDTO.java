@@ -6,10 +6,13 @@ import model.Identity;
 public class EntityToDTO {
 
 	public IdentityDTO convertIdentity(Identity identity) {
-		IdentityDTO globalUserDTO = new IdentityDTO(identity.getUsername(), identity.getPassword());
+		IdentityDTO identityDTO = new IdentityDTO(identity.getUsername(), identity.getPassword());
 
-		globalUserDTO.setId(identity.getIdentityId());
-		return globalUserDTO;
+		identityDTO.setId(identity.getIdentityId());
+		identityDTO.setEmail(identity.getEmail());
+		identityDTO.setFirstname(identity.getFirstname());
+		identityDTO.setLastname(identity.getLastname());
+		return identityDTO;
 
 	}
 	

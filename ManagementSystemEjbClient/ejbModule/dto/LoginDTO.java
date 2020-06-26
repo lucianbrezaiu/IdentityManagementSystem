@@ -2,7 +2,7 @@ package dto;
 
 public class LoginDTO {
 
-	String username;
+	String email;
 	String password;
 
 	public LoginDTO() {
@@ -11,16 +11,16 @@ public class LoginDTO {
 
 	public LoginDTO(String username, String password) {
 		super();
-		this.username = username;
+		this.email = username;
 		this.password = password;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -33,6 +33,6 @@ public class LoginDTO {
 
 	@Override
 	public String toString() {
-		return "LoginDTO [username=" + username + ", password=" + password + "]";
+		return "LoginDTO [email=" + email + ", password=" + password + "]";
 	}
 }

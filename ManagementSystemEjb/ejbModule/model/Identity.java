@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Identity.findAll", query="SELECT i FROM Identity i")
-@NamedQuery(name = "findIdentityByUsername", query = "SELECT i FROM Identity i WHERE i.username = :username")
+@NamedQuery(name = "findIdentityByEmail", query = "SELECT i FROM Identity i WHERE i.email = :email")
 public class Identity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -42,10 +42,10 @@ public class Identity implements Serializable {
 	public Identity() {
 	}
 
-	public Identity(String password, String username) {
+	public Identity(String username, String password) {
 		super();
-		this.password = password;
 		this.username = username;
+		this.password = password;
 	}
 	
 	public int getIdentityId() {

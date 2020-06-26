@@ -11,19 +11,19 @@ import dto.IdentityDTO;
 import dto.LoginDTO;
 import exception.LoginException;
 
-
+@SuppressWarnings("deprecation")
 @ManagedBean
 @SessionScoped
 public class LoginBean {
 
 	IdentityDTO identityDTO;
-	LoginDTO loginDTO = new LoginDTO();
+	LoginDTO loginDTO;
 	
 	@EJB
 	IdentityDAORemote identityDAORemote;
 	
 	public LoginBean() {
-		
+		loginDTO = new LoginDTO();
 	}
 	
 	public LoginDTO getLoginDTO() {
@@ -48,13 +48,10 @@ public class LoginBean {
 		try {
 			identityDTO = identityDAORemote.loginIdentity(loginDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
-			if(identityDTO.getUsername().equals("admin")) {
-				return "/adminFilter/admin.xhtml?faces-redirect=true";
-			}
-			return "/test";
-
+			
+			return "/adminFilter/admin.xhtml?faces-redirect=true";
 		} catch (LoginException e) {
-			//facesContext.addMessage display error message in html element <h:messages></h:messages>
+			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
 			facesContext.addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.message(), null));
 			return null;
 		}

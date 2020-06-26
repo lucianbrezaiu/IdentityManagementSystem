@@ -6,31 +6,46 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Management system - Login</title>
+	<title>Management system - Register</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
 	<h:outputStylesheet name="/css/login.css" />
 </h:head>
 <h:body>
 
-	<h:form label="loginForm" class="form">
-		<h2 class="title-form-login">Welcome! Login:</h2>
+	<h:form label="registerForm" class="form">
+		<h2 class="title-form-login">Welcome! Register:</h2>
 		<br />
 		
 		<h:outputLabel value="Email:"/>
-		<h:inputText class="effect-input" required="true" label="Email:"
-			placeholder="Email" validatorMessage="Enter username"
-			type="email" value="#{loginBean.loginDTO.email}"></h:inputText>
+		<h:inputText class="effect-input" required="true" label="Email"
+			placeholder="Email" validatorMessage="Enter email"
+			type="email" 	value="#{registerBean.registerDTO.email}"></h:inputText>
+		<br />
+		<br />
+		
+		<h:outputLabel value="First name:"/>
+		<h:inputText class="effect-input" required="true" label="First name"
+			placeholder="First name" validatorMessage="Enter firstname"
+			value="#{registerBean.registerDTO.firstname}"></h:inputText>
+		<br />
+		<br />
+		
+		<h:outputLabel value="last name:"/>
+		<h:inputText class="effect-input" required="true" label="Last ame"
+			placeholder="Last name" validatorMessage="Enter lastname"
+			value="#{registerBean.registerDTO.lastname}"></h:inputText>
 		<br />
 		<br />
 		
 		<h:outputLabel value="Password:"/>
 		<h:inputSecret class="effect-input" label="Password" required="true"
 			placeholder="Password" validatorMessage="Enter password"
-			value="#{loginBean.loginDTO.password}"></h:inputSecret>
+			value="#{registerBean.registerDTO.password}"></h:inputSecret>
 		<br />
 		<br />
-		<h:commandButton class="btn btn-info" value="Login"
-			action="#{loginBean.loginIdentity}"></h:commandButton>
+		
+		<h:commandButton class="btn btn-info" value="Register"
+			action="#{registerBean.registerIdentity}"></h:commandButton>
 		<br />
 		
 		<!-- h:messages is used to display error messages from the current facesContext  -->
@@ -39,8 +54,7 @@
 
 	<br />
 	<br />
-	
-	<h:link class="btn btn-info" value="Register" outcome="/register"/>
+	<h:link class="btn btn-info" value="Login" outcome="/login"/>
 	<br />
 
 </h:body>

@@ -16,7 +16,7 @@ import bean.LoginBean;
 @WebFilter("/adminFilter/*")
 public class AdminFilter implements Filter {
 
-	public static final String LOGIN_PAGE = "/index.xhtml";
+	public static final String AUTHENTICATED_USER_MAIN_PAGE = "/authenticatedUserFilter/user.xhtml";
 
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
@@ -30,7 +30,7 @@ public class AdminFilter implements Filter {
 			// todo: check if authenticated user has the admin role in this organization
 			filterChain.doFilter(servletRequest, servletResponse);
 		} else {
-			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + LOGIN_PAGE);
+			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + AUTHENTICATED_USER_MAIN_PAGE);
 		}
 	}
 

@@ -14,9 +14,11 @@ import javax.persistence.Query;
 
 import util.*;
 import dto.LoginDTO;
+import dto.RegisterDTO;
 import model.Identity;
 import dto.IdentityDTO;
 import exception.LoginException;
+import exception.RegisterException;
 
 
 @Stateless
@@ -65,7 +67,6 @@ public class IdentityDAO implements IdentityDAORemote {
 	@Override
 	public IdentityDTO update(IdentityDTO identityDTO) {
 		Identity identity = DTOToEntity.convertIdentity(identityDTO);
-		identity.setIdentityId(identityDTO.getId());
 		identity = entityManager.merge(identity);
 		return identityDTO;
 	}
@@ -79,15 +80,15 @@ public class IdentityDAO implements IdentityDAORemote {
 	@Override
 	public IdentityDTO loginIdentity(LoginDTO loginDTO) throws LoginException {
 		LOGGER.log(Level.INFO, String.format(
-				"Trying to login for %s with password %s.",
-				loginDTO.getUsername(),
+				"Trying to login %s with password %s.",
+				loginDTO.getEmail(),
 				loginDTO.getPassword()
 				));
 		
 		Identity identity = null;
 		try {
-			identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
-					.setParameter("username", loginDTO.getUsername()).getSingleResult();
+			identity = entityManager.createNamedQuery("findIdentityByEmail", Identity.class)
+					.setParameter("email", loginDTO.getEmail()).getSingleResult();
 		} catch (NoResultException e) {
 			throw new LoginException();
 		}
@@ -97,6 +98,27 @@ public class IdentityDAO implements IdentityDAORemote {
 
 		IdentityDTO userDTO = entityToDTO.convertIdentity(identity);
 		return userDTO;
+	}
+	
+	@Override
+	public void registerIdentity(RegisterDTO registerDTO) throws RegisterException{
+		LOGGER.log(Level.INFO, String.format(
+				"Trying to register %s with password %s.",
+				registerDTO.getEmail(),
+				registerDTO.getPassword()
+				));
+		
+		try {
+			String username = registerDTO.getEmail().split("@")[0];
+			IdentityDTO identityDTO = new IdentityDTO(username,registerDTO.getPassword());
+			identityDTO.setEmail(registerDTO.getEmail());
+			identityDTO.setFirstname(registerDTO.getFirstname());
+			identityDTO.setLastname(registerDTO.getLastname());
+			create(identityDTO);
+			
+		} catch (Exception e) {
+			throw new RegisterException();
+		}
 	}
 
 }
