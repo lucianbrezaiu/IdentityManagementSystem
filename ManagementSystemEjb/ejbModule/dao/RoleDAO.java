@@ -10,7 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dto.IdentityDTO;
 import dto.RoleDTO;
+import model.Identity;
 import model.Role;
 import util.DTOToEntity;
 import util.EntityToDTO;
@@ -50,9 +52,12 @@ public class RoleDAO implements RoleDAORemote {
 	}
 
 	@Override
-	public RoleDTO create(RoleDTO entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public RoleDTO create(RoleDTO roleDTO) {
+		Role role = DTOToEntity.convertRole(roleDTO);
+		entityManager.persist(role);
+		entityManager.flush();
+		roleDTO.setId(role.getRoleId());
+		return roleDTO;
 	}
 
 	@Override
@@ -64,5 +69,18 @@ public class RoleDAO implements RoleDAORemote {
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public RoleDTO findByName(String name) {
+		try {
+			Role role = entityManager.createNamedQuery("findRoleByName", Role.class)
+					.setParameter("name", name).getSingleResult();
+			RoleDTO roleDTO = entityToDTO.convertRole(role);
+			return roleDTO;
+		}
+		catch(Exception e) {
+			return null;
+		}
 	}
 }
