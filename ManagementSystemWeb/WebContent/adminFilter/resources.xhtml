@@ -16,7 +16,7 @@
 	/>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/> 
 	<h:outputStylesheet library="css" name="styles.css"/>
-	<h:outputStylesheet library="css" name="adminFilter/admin.css"/>
+	<h:outputStylesheet library="css" name="adminFilter.css"/>
 </h:head>
 <h:body>
 
@@ -30,6 +30,9 @@
 		   </ul>
 		   
 		   <div class="float-right" style="margin-right: 45px;">
+		   		<div class="username">
+			   		<h:link class="username" outcome="#{linksBean.USER_HOME_LINK}" value="#{loginBean.getCurrentUser()}"/>
+			    </div>
 			 	<div id="dropDownList" class="btn-group">
 			        <a id="dropdown" class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="background-color: white">
 			            <span class="glyphicon glyphicon-user"></span>
@@ -49,7 +52,7 @@
 	<br/>
 	<br/>
 	
-	<h:dataTable value="#{resourcesBean.resourceDAORemote.findAll()}" var="organization" styleClass="table table-hover table-striped">
+	<h:dataTable value="#{resourcesBean.getResources()}" var="organization" styleClass="table table-hover table-striped">
 	   <h:column>    				
 	      <f:facet name = "header">Name</f:facet>    				
 	      #{organization.name}

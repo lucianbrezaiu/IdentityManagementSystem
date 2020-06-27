@@ -17,8 +17,8 @@ import bean.LinksBean;
 import bean.LoginBean;
 import dao.IdentityDAORemote;
 
-@WebFilter("/adminFilter/*")
-public class AdminFilter implements Filter {
+@WebFilter("/userFilter/*")
+public class UserFilter implements Filter {
 
 	@EJB
 	private IdentityDAORemote identityDAORemote;
@@ -43,10 +43,8 @@ public class AdminFilter implements Filter {
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			String username = loginBean.getIdentityDTO().getUsername();
-			if(identityDAORemote.hasRoleInIdentitySystem(username,"idp_admin")) {
+			if(identityDAORemote.hasRoleInIdentitySystem(username,"idp_member")) {
 				filterChain.doFilter(servletRequest, servletResponse);
-			}else if(identityDAORemote.hasRoleInIdentitySystem(username,"idp_member")){
-				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getUSER_HOME_LINK());
 			}else {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getNOT_AUTHORIZED_LINK());
 			}
@@ -54,7 +52,7 @@ public class AdminFilter implements Filter {
 			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getLOGIN_LINK());
 		}
 	}
-
+	
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 	}
@@ -62,4 +60,5 @@ public class AdminFilter implements Filter {
 	@Override
 	public void destroy() {
 	}
+
 }

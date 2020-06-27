@@ -1,9 +1,12 @@
 package bean.adminFilter;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import dao.ResourceDAORemote;
+import dto.ResourceDTO;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -17,13 +20,7 @@ public class ResourcesBean {
 		
 	}
 
-	public ResourceDAORemote getResourceDAORemote() {
-		return resourceDAORemote;
+	public List<ResourceDTO> getResources(){
+		return resourceDAORemote.findAll();
 	}
-
-	public void setResourceDAORemote(ResourceDAORemote resourceDAORemote) {
-		this.resourceDAORemote = resourceDAORemote;
-	}
-
-	
 }

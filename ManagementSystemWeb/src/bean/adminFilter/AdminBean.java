@@ -1,10 +1,13 @@
 package bean.adminFilter;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import dao.IdentityDAORemote;
+import dto.IdentityDTO;
 
 
 @SuppressWarnings("deprecation")
@@ -19,11 +22,8 @@ public class AdminBean {
 		
 	}
 
-	public IdentityDAORemote getIdentityDAORemote() {
-		return identityDAORemote;
+	public List<IdentityDTO> getIdentities() {
+		return identityDAORemote.findAll();
 	}
-
-	public void setIdentityDAORemote(IdentityDAORemote identityDAORemote) {
-		this.identityDAORemote = identityDAORemote;
-	}
+	
 }

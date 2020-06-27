@@ -9,11 +9,13 @@ import exception.RegisterException;
 @Remote
 public interface IdentityDAORemote extends GenericDAO<IdentityDTO>{
 
+	IdentityDTO findByUsername(String username);
+	
 	IdentityDTO loginIdentity(LoginDTO loginDTO) throws LoginException;
 	
 	void registerIdentity(RegisterDTO registerDTO) throws RegisterException;
 	
-	boolean hasAdminRoleInIdentitySystem(String username);
+	boolean hasRoleInIdentitySystem(String username, String roleName);
 	
 	void addMemberRoleInIdentitySystem(String username);
 	

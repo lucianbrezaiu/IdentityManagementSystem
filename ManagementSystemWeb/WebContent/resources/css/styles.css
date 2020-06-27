@@ -6,3 +6,16 @@ h1{
     font-family: 'Times New Roman';
     display: inline;
 }
+
+.username {
+    font-size: 20px;
+    font-family: 'Times New Roman';
+    display: inline;
+    margin-right: 10px;
+    color: black;
+}
+
+.username:hover {
+    color: white;
+    text-decoration: none;
+}

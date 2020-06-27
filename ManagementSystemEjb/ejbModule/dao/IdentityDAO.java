@@ -50,6 +50,19 @@ public class IdentityDAO implements IdentityDAORemote {
 	}
 
 	@Override
+	public IdentityDTO findByUsername(String username) {
+		try {
+			Identity identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
+					.setParameter("username", username).getSingleResult();
+			IdentityDTO identityDTO = entityToDTO.convertIdentity(identity);
+			return identityDTO;
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
+	
+	@Override
 	public List<IdentityDTO> findAll() {
 		Query query = entityManager.createQuery("SELECT identity FROM Identity identity");
 		@SuppressWarnings("unchecked")
@@ -102,8 +115,8 @@ public class IdentityDAO implements IdentityDAORemote {
 			throw new LoginException();
 		}
 
-		IdentityDTO userDTO = entityToDTO.convertIdentity(identity);
-		return userDTO;
+		IdentityDTO identityDTO = entityToDTO.convertIdentity(identity);
+		return identityDTO;
 	}
 	
 	@Override
@@ -136,16 +149,16 @@ public class IdentityDAO implements IdentityDAORemote {
 		return username;
 	}
 	
-	public boolean hasAdminRoleInIdentitySystem(String username) {
+	public boolean hasRoleInIdentitySystem(String username, String roleName) {
 		try {
 			Identity identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
 					.setParameter("username", username).getSingleResult();
 			List<Identityroleresource> claims = identity.getIdentityroleresources();
 			for (Identityroleresource claim : claims) {
 				
-				String roleName = claim.getRole().getRoleName().trim();
+				String dbRole = claim.getRole().getRoleName().trim();
 				String resourceName = claim.getResource().getResourceName().trim();
-				if(roleName.equals("idp_admin") && resourceName.equals("Identity Management System")) {
+				if(dbRole.equals(roleName) && resourceName.equals("Identity Management System")) {
 					return true;
 				}
 			}

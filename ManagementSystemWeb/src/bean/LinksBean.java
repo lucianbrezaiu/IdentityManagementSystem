@@ -12,6 +12,8 @@ public class LinksBean {
 	
 	private String REGISTER_LINK = "/register.xhtml";
 		
+	private String NOT_AUTHORIZED_LINK = "/notAuthorized.xhtml";
+	
 	private String ADMIN_HOME_LINK = "/adminFilter/home.xhtml?faces-redirect=true";
 	
 	private String ADMIN_ORGANISATIONS_LINK = "/adminFilter/organisations.xhtml?faces-redirect=true";
@@ -20,7 +22,7 @@ public class LinksBean {
 	
 	private String ADMIN_ROLES_LINK = "/adminFilter/roles.xhtml?faces-redirect=true";
 	
-	private String USER_HOME_LINK = "/userFilter/home.xhtml?faces-redirect=true";
+	private String USER_HOME_LINK = "/userFilter/home.xhtml";
 
 	public LinksBean() {
 		
@@ -40,6 +42,14 @@ public class LinksBean {
 
 	public void setREGISTER_LINK(String rEGISTER_LINK) {
 		REGISTER_LINK = rEGISTER_LINK;
+	}
+
+	public String getNOT_AUTHORIZED_LINK() {
+		return NOT_AUTHORIZED_LINK;
+	}
+
+	public void setNOT_AUTHORIZED_LINK(String nOT_AUTHORIZED_LINK) {
+		NOT_AUTHORIZED_LINK = nOT_AUTHORIZED_LINK;
 	}
 
 	public String getADMIN_HOME_LINK() {
