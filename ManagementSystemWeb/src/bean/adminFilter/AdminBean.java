@@ -1,12 +1,12 @@
 package bean.adminFilter;
 
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dao.IdentityDAORemote;
+import dao.OrganizationDAORemote;
 import links.Links;
 
 @SuppressWarnings("deprecation")
@@ -15,15 +15,21 @@ import links.Links;
 public class AdminBean {
 
 	@EJB
-	IdentityDAORemote identityDAORemote;
+	private IdentityDAORemote identityDAORemote;
 	
-	String ADMIN_HOME_LINK = Links.ADMIN_HOME_LINK; 
-	String ADMIN_ORGANISATIONS_LINK = Links.ADMIN_ORGANISATIONS_LINK;
-	String ADMIN_RESOURCES_LINK = Links.ADMIN_RESOURCES_LINK;
-	String ADMIN_ROLES_LINK = Links.ADMIN_ROLES_LINK;
+	@EJB
+	private OrganizationDAORemote organizationDAORemote;
+	
+	private String ADMIN_HOME_LINK;
+	private String ADMIN_ORGANISATIONS_LINK;
+	private String ADMIN_RESOURCES_LINK;
+	private String ADMIN_ROLES_LINK;
 	
 	public AdminBean() {
-		
+		ADMIN_HOME_LINK = Links.ADMIN_HOME_LINK; 
+		ADMIN_ORGANISATIONS_LINK = Links.ADMIN_ORGANISATIONS_LINK;
+		ADMIN_RESOURCES_LINK = Links.ADMIN_RESOURCES_LINK;
+		ADMIN_ROLES_LINK = Links.ADMIN_ROLES_LINK;
 	}
 
 	public IdentityDAORemote getIdentityDAORemote() {
@@ -32,6 +38,14 @@ public class AdminBean {
 
 	public void setIdentityDAORemote(IdentityDAORemote identityDAORemote) {
 		this.identityDAORemote = identityDAORemote;
+	}
+
+	public OrganizationDAORemote getOrganizationDAORemote() {
+		return organizationDAORemote;
+	}
+
+	public void setOrganizationDAORemote(OrganizationDAORemote organizationDAORemote) {
+		this.organizationDAORemote = organizationDAORemote;
 	}
 
 	public String getADMIN_HOME_LINK() {

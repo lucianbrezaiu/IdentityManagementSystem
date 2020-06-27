@@ -1,7 +1,9 @@
 package util;
 
 import dto.IdentityDTO;
+import dto.OrganizationDTO;
 import model.Identity;
+import model.Organization;
 
 public class DTOToEntity {
 
@@ -13,5 +15,12 @@ public class DTOToEntity {
 		identity.setLastname(identityDTO.getLastname());
 		return identity;
 	}
+	
+	public Organization convertIdentity(OrganizationDTO organizationDTO) {
+		Organization organization = new Organization(organizationDTO.getName(), organizationDTO.getCui());
+		
+		return organization;
+	}
+	
 
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -29,11 +30,12 @@ public class IdentityDAO implements IdentityDAORemote {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	private EntityToDTO entityToDTO = new EntityToDTO();;
+	private EntityToDTO entityToDTO = new EntityToDTO();
 	private DTOToEntity DTOToEntity = new DTOToEntity();
 	
 	public IdentityDAO() {
-		
+		entityToDTO = new EntityToDTO();
+		DTOToEntity = new DTOToEntity();
 	}
 	
 	@Override
@@ -81,14 +83,14 @@ public class IdentityDAO implements IdentityDAORemote {
 	public IdentityDTO loginIdentity(LoginDTO loginDTO) throws LoginException {
 		LOGGER.log(Level.INFO, String.format(
 				"Trying to login %s with password %s.",
-				loginDTO.getEmail(),
+				loginDTO.getUsername(),
 				loginDTO.getPassword()
 				));
 		
 		Identity identity = null;
 		try {
-			identity = entityManager.createNamedQuery("findIdentityByEmail", Identity.class)
-					.setParameter("email", loginDTO.getEmail()).getSingleResult();
+			identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
+					.setParameter("username", loginDTO.getUsername()).getSingleResult();
 		} catch (NoResultException e) {
 			throw new LoginException();
 		}
@@ -109,7 +111,7 @@ public class IdentityDAO implements IdentityDAORemote {
 				));
 		
 		try {
-			String username = registerDTO.getEmail().split("@")[0];
+			String username = generateUsernameForEmail(registerDTO.getEmail());
 			IdentityDTO identityDTO = new IdentityDTO(username,registerDTO.getPassword());
 			identityDTO.setEmail(registerDTO.getEmail());
 			identityDTO.setFirstname(registerDTO.getFirstname());
@@ -120,5 +122,16 @@ public class IdentityDAO implements IdentityDAORemote {
 			throw new RegisterException();
 		}
 	}
-
+	
+	private String generateUsernameForEmail(String email) {
+		
+		int min = 100;
+		int max = 999;
+		Integer random = new Random().nextInt((max - min) + 1) + min;
+		
+		String username = email.split("@")[0];
+		
+		username += String.format("#%s",random.toString());
+		return username;
+	}
 }

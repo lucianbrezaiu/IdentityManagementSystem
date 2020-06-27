@@ -28,6 +28,11 @@ public class Organization implements Serializable {
 
 	public Organization() {
 	}
+	
+	public Organization(String organizationName, String cui) {
+		this.organizationName = organizationName;
+		this.cui = cui;
+	}
 
 	public int getOrganizationId() {
 		return this.organizationId;
