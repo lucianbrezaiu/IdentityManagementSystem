@@ -64,7 +64,7 @@ public class OrganizationsBean {
 			
 			organizationDAORemote.create(organizationDTO);
 			organizationDTO = new OrganizationDTO();
-			return linksBean.getADMIN_ORGANIZATIONS_LINK()();
+			return linksBean.getADMIN_ORGANIZATIONS_LINK();
 		}catch(Exception e) {
 			facesContext.addMessage("addOrganizationForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! Please try again!", null));
 			return null;
