@@ -16,7 +16,9 @@ public class LinksBean {
 	
 	private String ADMIN_HOME_LINK = "/adminFilter/home.xhtml?faces-redirect=true";
 	
-	private String ADMIN_ORGANISATIONS_LINK = "/adminFilter/organisations.xhtml?faces-redirect=true";
+	private String ADMIN_ORGANIZATIONS_LINK = "/adminFilter/organizations.xhtml?faces-redirect=true";
+	
+	private String ADMIN_ADD_ORGANIZATION_LINK = "/adminFilter/addOrganization.xhtml?faces-redirect=true";
 	
 	private String ADMIN_RESOURCES_LINK = "/adminFilter/resources.xhtml?faces-redirect=true";
 	
@@ -62,12 +64,20 @@ public class LinksBean {
 		ADMIN_HOME_LINK = aDMIN_HOME_LINK;
 	}
 
-	public String getADMIN_ORGANISATIONS_LINK() {
-		return ADMIN_ORGANISATIONS_LINK;
+	public String getADMIN_ORGANIZATIONS_LINK() {
+		return ADMIN_ORGANIZATIONS_LINK;
 	}
 
-	public void setADMIN_ORGANISATIONS_LINK(String aDMIN_ORGANISATIONS_LINK) {
-		ADMIN_ORGANISATIONS_LINK = aDMIN_ORGANISATIONS_LINK;
+	public void setADMIN_ORGANIZATIONS_LINK(String aDMIN_ORGANIZATIONS_LINK) {
+		ADMIN_ORGANIZATIONS_LINK = aDMIN_ORGANIZATIONS_LINK;
+	}
+
+	public String getADMIN_ADD_ORGANIZATION_LINK() {
+		return ADMIN_ADD_ORGANIZATION_LINK;
+	}
+
+	public void setADMIN_ADD_ORGANIZATION_LINK(String aDMIN_ADD_ORGANIZATION_LINK) {
+		ADMIN_ADD_ORGANIZATION_LINK = aDMIN_ADD_ORGANIZATION_LINK;
 	}
 
 	public String getADMIN_RESOURCES_LINK() {

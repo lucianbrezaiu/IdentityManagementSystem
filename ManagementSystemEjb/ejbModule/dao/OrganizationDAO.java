@@ -11,7 +11,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import dto.OrganizationDTO;
+import dto.RoleDTO;
 import model.Organization;
+import model.Role;
 import util.DTOToEntity;
 import util.EntityToDTO;
 
@@ -71,6 +73,32 @@ public class OrganizationDAO implements OrganizationDAORemote {
 	public void delete(int id) {
 		Organization organisation = entityManager.find(Organization.class, id);
 		entityManager.remove(organisation);
+	}
+	
+	@Override
+	public OrganizationDTO findByName(String name) {
+		try {
+			Organization organization = entityManager.createNamedQuery("findOrganizationByName", Organization.class)
+					.setParameter("name", name).getSingleResult();
+			OrganizationDTO organizationDTO = entityToDTO.convertOrganization(organization);
+			return organizationDTO;
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
+	
+	@Override
+	public OrganizationDTO findByCui(String cui) {
+		try {
+			Organization organization = entityManager.createNamedQuery("findOrganizationByCUI", Organization.class)
+					.setParameter("cui", cui).getSingleResult();
+			OrganizationDTO organizationDTO = entityToDTO.convertOrganization(organization);
+			return organizationDTO;
+		}
+		catch(Exception e) {
+			return null;
+		}
 	}
 
 }
