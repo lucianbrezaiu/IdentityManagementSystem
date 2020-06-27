@@ -30,8 +30,8 @@ public class IdentityDAO implements IdentityDAORemote {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	private EntityToDTO entityToDTO = new EntityToDTO();
-	private DTOToEntity DTOToEntity = new DTOToEntity();
+	private EntityToDTO entityToDTO;
+	private DTOToEntity DTOToEntity;
 	
 	public IdentityDAO() {
 		entityToDTO = new EntityToDTO();

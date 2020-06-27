@@ -23,8 +23,8 @@ public class OrganizationDAO implements OrganizationDAORemote {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	private EntityToDTO entityToDTO = new EntityToDTO();
-	private DTOToEntity DTOToEntity = new DTOToEntity();
+	private EntityToDTO entityToDTO;
+	private DTOToEntity DTOToEntity;
 	
 	public OrganizationDAO() {
 		entityToDTO = new EntityToDTO();
@@ -34,7 +34,7 @@ public class OrganizationDAO implements OrganizationDAORemote {
 	@Override
 	public OrganizationDTO findById(int id) {
 		Organization organization = entityManager.find(Organization.class, id);
-		OrganizationDTO organizationDTO = entityToDTO.convertIdentity(organization);
+		OrganizationDTO organizationDTO = entityToDTO.convertOrganization(organization);
 		return organizationDTO;
 	}
 
@@ -45,14 +45,14 @@ public class OrganizationDAO implements OrganizationDAORemote {
 		List<Organization> organizations = query.getResultList();
 		List<OrganizationDTO> organizationsDTO = new ArrayList<>();
 		for (Organization identity : organizations) {
-			organizationsDTO.add(entityToDTO.convertIdentity(identity));
+			organizationsDTO.add(entityToDTO.convertOrganization(identity));
 		}
 		return organizationsDTO;
 	}
 
 	@Override
 	public OrganizationDTO create(OrganizationDTO organizationDTO) {
-		Organization organization = DTOToEntity.convertIdentity(organizationDTO);
+		Organization organization = DTOToEntity.convertOrganization(organizationDTO);
 		entityManager.persist(organization);
 		entityManager.flush();
 		organizationDTO.setId(organization.getOrganizationId());
@@ -61,7 +61,7 @@ public class OrganizationDAO implements OrganizationDAORemote {
 
 	@Override
 	public OrganizationDTO update(OrganizationDTO organizationDTO) {
-		Organization organization = DTOToEntity.convertIdentity(organizationDTO);
+		Organization organization = DTOToEntity.convertOrganization(organizationDTO);
 		organization.setOrganizationId(organizationDTO.getId());
 		organization = entityManager.merge(organization);
 		return organizationDTO;

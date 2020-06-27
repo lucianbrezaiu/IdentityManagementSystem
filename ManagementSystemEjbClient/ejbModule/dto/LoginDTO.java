@@ -2,8 +2,8 @@ package dto;
 
 public class LoginDTO {
 
-	String username;
-	String password;
+	private String username;
+	private String password;
 
 	public LoginDTO() {
 		super();

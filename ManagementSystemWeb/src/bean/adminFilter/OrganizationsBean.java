@@ -14,6 +14,10 @@ public class OrganizationsBean {
 	@EJB
 	private OrganizationDAORemote organizationDAORemote;
 	
+	public OrganizationsBean() {
+			
+	}
+		
 	public OrganizationDAORemote getOrganizationDAORemote() {
 		return organizationDAORemote;
 	}

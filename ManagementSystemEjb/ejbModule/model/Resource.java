@@ -26,6 +26,10 @@ public class Resource implements Serializable {
 
 	public Resource() {
 	}
+	
+	public Resource(String name) {
+		this.resourceName = name;
+	}
 
 	public int getResourceId() {
 		return this.resourceId;

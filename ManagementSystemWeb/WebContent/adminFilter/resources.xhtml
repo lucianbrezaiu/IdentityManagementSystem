@@ -23,9 +23,9 @@
 	<b:navBar class="navbar">
 		<div class="container-fluid">
 		   <ul class="nav float-left">
-				     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Home"/></li>
+			 <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Home"/></li>
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ORGANISATIONS_LINK}" value="Organizations"/></li>
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
+		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ROLES_LINK}" value="Roles"/></li>
 		   </ul>
 		   
@@ -47,6 +47,13 @@
 	<br/>
 	<h1>Resources</h1>
 	<br/>
+
+	<h:dataTable value="#{resourcesBean.resourceDAORemote.findAll()}" var="organization" styleClass="table table-hover table-striped">
+	   <h:column>    				
+	      <f:facet name = "header">Name</f:facet>    				
+	      #{organization.name}
+	   </h:column>
+	</h:dataTable>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

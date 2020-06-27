@@ -77,9 +77,13 @@ insert into identity(organizationId,username,email,password,firstName,lastName) 
 (7,'lucianbrezaiu','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu');
 
 insert into role(roleName,roleDescription) values
-('admin','administrator');
+('idp_admin','administrator of identity mangement system'),
+('idp_member','member of identity mangement system');
 
 insert into resource(resourceName) values 
+('Dox'),
+('Intranet'),
+('Condica Online'),
 ('Identity Management System');
 
 insert into identityroleresource(identityId,roleId,resourceId) values 

@@ -2,11 +2,11 @@ package dto;
 
 public class RegisterDTO {
 
-	String email;
-	String password;
-	String firstname;
-	String lastname;
-	
+	private String email;
+	private String password;
+	private String firstname;
+	private String lastname;
+
 	public RegisterDTO() {
 		super();
 	}
