@@ -74,7 +74,7 @@ insert into organization(organizationName,cui) values
 
 insert into identity(organizationId,username,email,password,firstName,lastName) values
 (1,'admin','admin@outlook.com','Copernic@1234','admin','admin'),
-(7,'luci.brezaiu','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu');
+(7,'lucianbrezaiu','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu');
 
 insert into role(roleName,roleDescription) values
 ('admin','administrator');

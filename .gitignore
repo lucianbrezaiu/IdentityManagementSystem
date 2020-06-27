@@ -1,3 +1,4 @@
-/ManagementSystemEjb/build/*
-/ManagementSystemEjbClient/build/*
-/ManagementSystemWeb/build/*
+/.metadata/
+/ManagementSystemEjb/build/
+/ManagementSystemEjbClient/build/
+/ManagementSystemWeb/build/

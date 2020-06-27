@@ -10,6 +10,7 @@ import dao.IdentityDAORemote;
 import dto.IdentityDTO;
 import dto.LoginDTO;
 import exception.LoginException;
+import links.Links;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -49,7 +50,8 @@ public class LoginBean {
 			identityDTO = identityDAORemote.loginIdentity(loginDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
 			
-			return "/adminFilter/admin.xhtml?faces-redirect=true";
+			return Links.ADMIN_MAIN_LINK;
+			//"/adminFilter/admin.xhtml?faces-redirect=true";
 		} catch (LoginException e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
 			facesContext.addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.message(), null));

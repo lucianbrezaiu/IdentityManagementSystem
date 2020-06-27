@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import dao.IdentityDAORemote;
 import dto.IdentityDTO;
 import dto.RegisterDTO;
+import links.Links;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -56,7 +57,7 @@ public class RegisterBean {
 			
 			identityDAORemote.registerIdentity(registerDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", registerDTO);
-			return "/authenticatedUserFilter/user.xhtml?faces-redirect=true";
+			return Links.USER_MAIN_LINK;
 
 		} catch (Exception e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
