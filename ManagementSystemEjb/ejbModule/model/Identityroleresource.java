@@ -34,6 +34,12 @@ public class Identityroleresource implements Serializable {
 
 	public Identityroleresource() {
 	}
+	
+	public Identityroleresource(Identity identity,Role role, Resource resource) {
+		this.identity = identity;
+		this.role = role;
+		this.resource = resource;
+	}
 
 	public int getId() {
 		return this.id;

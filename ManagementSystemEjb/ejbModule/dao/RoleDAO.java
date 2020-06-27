@@ -64,7 +64,5 @@ public class RoleDAO implements RoleDAORemote {
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		
 	}
-
 }

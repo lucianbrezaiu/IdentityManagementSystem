@@ -16,8 +16,11 @@ import javax.persistence.Query;
 import util.*;
 import dto.LoginDTO;
 import dto.RegisterDTO;
+import dto.RoleDTO;
 import model.Identity;
 import model.Identityroleresource;
+import model.Resource;
+import model.Role;
 import dto.IdentityDTO;
 import exception.LoginException;
 import exception.RegisterException;
@@ -109,8 +112,7 @@ public class IdentityDAO implements IdentityDAORemote {
 				"Trying to register %s with password %s.",
 				registerDTO.getEmail(),
 				registerDTO.getPassword()
-				));
-		
+				));		
 		try {
 			String username = generateUsernameForEmail(registerDTO.getEmail());
 			IdentityDTO identityDTO = new IdentityDTO(username,registerDTO.getPassword());
@@ -118,6 +120,7 @@ public class IdentityDAO implements IdentityDAORemote {
 			identityDTO.setFirstname(registerDTO.getFirstname());
 			identityDTO.setLastname(registerDTO.getLastname());
 			create(identityDTO);
+			addMemberRoleInIdentitySystem(username);
 			
 		} catch (Exception e) {
 			throw new RegisterException();
@@ -125,18 +128,15 @@ public class IdentityDAO implements IdentityDAORemote {
 	}
 	
 	private String generateUsernameForEmail(String email) {
-		
 		int min = 100;
 		int max = 999;
 		Integer random = new Random().nextInt((max - min) + 1) + min;
-		
 		String username = email.split("@")[0];
-		
 		username += String.format("#%s",random.toString());
 		return username;
 	}
 	
-	public boolean HasAdminRoleInIdentitySystem(String username) {
+	public boolean hasAdminRoleInIdentitySystem(String username) {
 		try {
 			Identity identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
 					.setParameter("username", username).getSingleResult();
@@ -154,5 +154,27 @@ public class IdentityDAO implements IdentityDAORemote {
 		catch(Exception e) {
 			return false;
 		}
+	}
+	
+	public void addMemberRoleInIdentitySystem(String username) {
+		Identity identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
+				.setParameter("username", username).getSingleResult();
+		
+		Role role = entityManager.createNamedQuery("findRoleByName", Role.class)
+				.setParameter("name", "idp_member").getSingleResult();
+	
+		Resource resource = entityManager.createNamedQuery("findResourceByName", Resource.class)
+				.setParameter("name", "Identity Management System").getSingleResult();
+		
+		Identityroleresource claim = new Identityroleresource(identity,role,resource);
+		
+		entityManager.persist(claim);
+		entityManager.flush();
+		LOGGER.log(Level.INFO, String.format(
+				"The user %s was successfully registered and received the role %s in %s.",
+				username,
+				role.getRoleName(),
+				resource.getResourceName()
+				));	
 	}
 }

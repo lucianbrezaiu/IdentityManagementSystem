@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Resource.findAll", query="SELECT r FROM Resource r")
+@NamedQuery(name = "findResourceByName", query = "SELECT r FROM Resource r WHERE r.resourceName = :name")
 public class Resource implements Serializable {
 	private static final long serialVersionUID = 1L;
 

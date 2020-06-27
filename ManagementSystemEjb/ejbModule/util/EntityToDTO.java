@@ -33,7 +33,7 @@ public class EntityToDTO {
 	
 	public RoleDTO convertRole(Role role) {
 		RoleDTO roleDTO = new RoleDTO(role.getRoleName(), role.getRoleDescription());
+		roleDTO.setId(role.getRoleId());
 		return roleDTO;
 	}
-	
 }

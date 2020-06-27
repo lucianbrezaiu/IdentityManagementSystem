@@ -43,7 +43,7 @@ public class AdminFilter implements Filter {
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			String username = loginBean.getIdentityDTO().getUsername();
-			if(identityDAORemote.HasAdminRoleInIdentitySystem(username)) {
+			if(identityDAORemote.hasAdminRoleInIdentitySystem(username)) {
 				filterChain.doFilter(servletRequest, servletResponse);
 			}else {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getUSER_HOME_LINK());

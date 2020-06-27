@@ -13,6 +13,8 @@ public interface IdentityDAORemote extends GenericDAO<IdentityDTO>{
 	
 	void registerIdentity(RegisterDTO registerDTO) throws RegisterException;
 	
-	boolean HasAdminRoleInIdentitySystem(String username);
+	boolean hasAdminRoleInIdentitySystem(String username);
+	
+	void addMemberRoleInIdentitySystem(String username);
 	
 }

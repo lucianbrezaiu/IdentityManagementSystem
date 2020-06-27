@@ -4,13 +4,13 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the role database table.
  * 
  */
 @Entity
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+@NamedQuery(name = "findRoleByName", query = "SELECT r FROM Role r WHERE r.roleName = :name")
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -101,5 +101,4 @@ public class Role implements Serializable {
 	public void setRights(List<Right> rights) {
 		this.rights = rights;
 	}
-
 }
