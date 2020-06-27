@@ -5,7 +5,6 @@ import javax.ejb.Remote;
 import exception.LoginException;
 import exception.RegisterException;
 
-
 @Remote
 public interface IdentityDAORemote extends GenericDAO<IdentityDTO>{
 

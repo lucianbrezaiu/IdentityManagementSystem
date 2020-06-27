@@ -10,8 +10,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dto.OrganizationDTO;
 import dto.ResourceDTO;
+import model.Organization;
 import model.Resource;
+import model.Role;
 import util.DTOToEntity;
 import util.EntityToDTO;
 
@@ -50,9 +53,12 @@ public class ResourceDAO implements ResourceDAORemote {
 	}
 
 	@Override
-	public ResourceDTO create(ResourceDTO entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResourceDTO create(ResourceDTO resourceDTO) {
+		Resource resource = DTOToEntity.convertResource(resourceDTO);
+		entityManager.persist(resource);
+		entityManager.flush();
+		resourceDTO.setId(resource.getResourceId());
+		return resourceDTO;
 	}
 
 	@Override
@@ -64,7 +70,18 @@ public class ResourceDAO implements ResourceDAORemote {
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		
 	}
-
+	
+	@Override
+	public ResourceDTO findByName(String name) {
+		try {
+			Resource resource = entityManager.createNamedQuery("findResourceByName", Resource.class)
+					.setParameter("name", name).getSingleResult();
+			ResourceDTO resourceDTO = entityToDTO.convertResource(resource);
+			return resourceDTO;
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
 }

@@ -22,6 +22,8 @@ public class LinksBean {
 	
 	private String ADMIN_RESOURCES_LINK = "/adminFilter/resources.xhtml?faces-redirect=true";
 	
+	private String ADMIN_ADD_RESOURCE_LINK = "/adminFilter/addResource.xhtml?faces-redirect=true";
+	
 	private String ADMIN_ROLES_LINK = "/adminFilter/roles.xhtml?faces-redirect=true";
 	
 	private String ADMIN_ADD_ROLE_LINK = "/adminFilter/addRole.xhtml?faces-redirect=true";
@@ -86,6 +88,14 @@ public class LinksBean {
 
 	public void setADMIN_RESOURCES_LINK(String aDMIN_RESOURCES_LINK) {
 		ADMIN_RESOURCES_LINK = aDMIN_RESOURCES_LINK;
+	}
+
+	public String getADMIN_ADD_RESOURCE_LINK() {
+		return ADMIN_ADD_RESOURCE_LINK;
+	}
+
+	public void setADMIN_ADD_RESOURCE_LINK(String aDMIN_ADD_RESOURCE_LINK) {
+		ADMIN_ADD_RESOURCE_LINK = aDMIN_ADD_RESOURCE_LINK;
 	}
 
 	public String getADMIN_ROLES_LINK() {
