@@ -17,6 +17,7 @@ import util.*;
 import dto.LoginDTO;
 import dto.RegisterDTO;
 import model.Identity;
+import model.Identityroleresource;
 import dto.IdentityDTO;
 import exception.LoginException;
 import exception.RegisterException;
@@ -133,5 +134,25 @@ public class IdentityDAO implements IdentityDAORemote {
 		
 		username += String.format("#%s",random.toString());
 		return username;
+	}
+	
+	public boolean HasAdminRoleInIdentitySystem(String username) {
+		try {
+			Identity identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
+					.setParameter("username", username).getSingleResult();
+			List<Identityroleresource> claims = identity.getIdentityroleresources();
+			for (Identityroleresource claim : claims) {
+				
+				String roleName = claim.getRole().getRoleName().trim();
+				String resourceName = claim.getResource().getResourceName().trim();
+				if(roleName.equals("idp_admin") && resourceName.equals("Identity Management System")) {
+					return true;
+				}
+			}
+			return false;
+		}
+		catch(Exception e) {
+			return false;
+		}
 	}
 }

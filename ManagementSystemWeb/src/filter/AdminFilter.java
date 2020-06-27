@@ -1,6 +1,8 @@
 package filter;
 
 import java.io.IOException;
+
+import javax.ejb.EJB;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,10 +15,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.LinksBean;
 import bean.LoginBean;
+import dao.IdentityDAORemote;
 
 @WebFilter("/adminFilter/*")
 public class AdminFilter implements Filter {
 
+	@EJB
+	private IdentityDAORemote identityDAORemote;
+	
+	public IdentityDAORemote getIdentityDAORemote() {
+		return identityDAORemote;
+	}
+
+	public void setIdentityDAORemote(IdentityDAORemote identityDAORemote) {
+		this.identityDAORemote = identityDAORemote;
+	}
+	
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
@@ -28,8 +42,8 @@ public class AdminFilter implements Filter {
 		
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
-			if(loginBean.getIdentityDTO().getUsername().equals("admin")) {
-				// todo: check if authenticated user has the admin role in this organization
+			String username = loginBean.getIdentityDTO().getUsername();
+			if(identityDAORemote.HasAdminRoleInIdentitySystem(username)) {
 				filterChain.doFilter(servletRequest, servletResponse);
 			}else {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getUSER_HOME_LINK());

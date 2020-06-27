@@ -87,5 +87,6 @@ insert into resource(resourceName) values
 ('Identity Management System');
 
 insert into identityroleresource(identityId,roleId,resourceId) values 
-(1,1,1);
+(1,1,4),
+(2,2,4);
 

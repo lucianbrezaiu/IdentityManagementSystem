@@ -3,9 +3,11 @@ package util;
 import dto.IdentityDTO;
 import dto.OrganizationDTO;
 import dto.ResourceDTO;
+import dto.RoleDTO;
 import model.Identity;
 import model.Organization;
 import model.Resource;
+import model.Role;
 
 public class EntityToDTO {
 
@@ -27,6 +29,11 @@ public class EntityToDTO {
 	public ResourceDTO convertResource(Resource resource) {
 		ResourceDTO resourceDTO = new ResourceDTO(resource.getResourceName());
 		return resourceDTO;
+	}
+	
+	public RoleDTO convertRole(Role role) {
+		RoleDTO roleDTO = new RoleDTO(role.getRoleName(), role.getRoleDescription());
+		return roleDTO;
 	}
 	
 }

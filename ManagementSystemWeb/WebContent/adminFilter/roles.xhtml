@@ -47,6 +47,18 @@
 	<br/>
 	<h1>Roles</h1>
 	<br/>
+	<br/>
+	
+	<h:dataTable value="#{rolesBean.roleDAORemote.findAll()}" var="role" styleClass="table table-hover table-striped">
+	   <h:column>    				
+	      <f:facet name = "header">Name</f:facet>    				
+	      #{role.name}
+	   </h:column>
+	   <h:column>
+	      <f:facet name = "header">Description</f:facet>
+	      #{role.description}
+	   </h:column>
+	</h:dataTable>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
