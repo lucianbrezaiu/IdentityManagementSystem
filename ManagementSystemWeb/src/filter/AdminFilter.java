@@ -25,11 +25,15 @@ public class AdminFilter implements Filter {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
-		if (loginBean != null && loginBean.getIdentityDTO() != null && loginBean.getIdentityDTO().getUsername().equals("admin")) {
-			// todo: check if authenticated user has the admin role in this organization
-			filterChain.doFilter(servletRequest, servletResponse);
+		if (loginBean != null && loginBean.getIdentityDTO() != null) {
+			if(loginBean.getIdentityDTO().getUsername().equals("admin")) {
+				// todo: check if authenticated user has the admin role in this organization
+				filterChain.doFilter(servletRequest, servletResponse);
+			}else {
+				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + Links.USER_HOME_LINK);
+			}
 		} else {
-			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + Links.USER_MAIN_LINK);
+			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + Links.LOGIN_LINK);
 		}
 	}
 

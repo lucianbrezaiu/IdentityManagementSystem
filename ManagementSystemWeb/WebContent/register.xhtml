@@ -8,54 +8,62 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Management system - Register</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
-	<h:outputStylesheet name="/css/login.css" />
+	<h:outputStylesheet library="css" name="styles.css"/>
 </h:head>
 <h:body>
 
 	<h:form label="registerForm" class="form">
-		<h2 class="title-form-login">Welcome! Register:</h2>
-		<br />
-		
-		<h:outputLabel value="Email:"/>
-		<h:inputText class="effect-input" required="true" label="Email"
-			placeholder="Email" validatorMessage="Enter email"
-			type="email" 	value="#{registerBean.registerDTO.email}"></h:inputText>
+		<h1>Welcome! Register:</h1>
 		<br />
 		<br />
 		
-		<h:outputLabel value="First name:"/>
-		<h:inputText class="effect-input" required="true" label="First name"
-			placeholder="First name" validatorMessage="Enter firstname"
-			value="#{registerBean.registerDTO.firstname}"></h:inputText>
-		<br />
-		<br />
+		<div class="form-group col-xs-4 col-sm-2">
+			Or redirect to 
+			<h:link value="Login" outcome="#{registerBean.LOGIN_LINK}"/>
+		</div>
 		
-		<h:outputLabel value="Last name:"/>
-		<h:inputText class="effect-input" required="true" label="Last ame"
-			placeholder="Last name" validatorMessage="Enter lastname"
-			value="#{registerBean.registerDTO.lastname}"></h:inputText>
-		<br />
-		<br />
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="Email:"/>
+			<h:inputText class="effect-input" required="true" label="Email"
+				placeholder="Email" validatorMessage="Enter email"
+				type="email" 	value="#{registerBean.registerDTO.email}"></h:inputText>
+			<br />
+		</div>
 		
-		<h:outputLabel value="Password:"/>
-		<h:inputSecret class="effect-input" label="Password" required="true"
-			placeholder="Password" validatorMessage="Enter password"
-			value="#{registerBean.registerDTO.password}"></h:inputSecret>
-		<br />
-		<br />
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="First name:"/>
+			<h:inputText class="effect-input" required="true" label="First name"
+				placeholder="First name" validatorMessage="Enter firstname"
+				value="#{registerBean.registerDTO.firstname}"></h:inputText>
+			<br />
+		</div>
 		
-		<h:commandButton class="btn btn-info" value="Register"
-			action="#{registerBean.registerIdentity}"></h:commandButton>
-		<br />
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="Last name:"/>
+			<h:inputText class="effect-input" required="true" label="Last name"
+				placeholder="Last name" validatorMessage="Enter lastname"
+				value="#{registerBean.registerDTO.lastname}"></h:inputText>
+			<br />
+		</div>
 		
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="Password:"/>
+			<h:inputSecret class="effect-input" label="Password" required="true"
+				placeholder="Password" validatorMessage="Enter password"
+				value="#{registerBean.registerDTO.password}"></h:inputSecret>
+			<br />
+		</div>
+		
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:commandButton class="btn btn-dark float-right" value="Register" action="#{registerBean.registerIdentity}"></h:commandButton>
+			<br />
+		</div>
+	
 		<!-- h:messages is used to display error messages from the current facesContext  -->
 		<h:messages infoStyle="color:darkgreen" errorStyle="color:darkred"></h:messages>
 	</h:form>
 
-	<br />
-	<br />
-	<h:link class="btn btn-info" value="Login" outcome="/login"/>
-	<br />
+	
 
 </h:body>
 </html>

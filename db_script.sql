@@ -73,7 +73,7 @@ insert into organization(organizationName,cui) values
 ('Essensys','59753264');
 
 insert into identity(organizationId,username,email,password,firstName,lastName) values
-(1,'admin','admin@outlook.com','Copernic@1234','admin','admin'),
+(1,'admin','admin@outlook.com','admin','admin','admin'),
 (7,'lucianbrezaiu','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu');
 
 insert into role(roleName,roleDescription) values

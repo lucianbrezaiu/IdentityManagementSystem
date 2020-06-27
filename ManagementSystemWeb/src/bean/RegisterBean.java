@@ -20,12 +20,13 @@ public class RegisterBean {
 
 	IdentityDTO identityDTO;
 	RegisterDTO registerDTO;
-	
+	String LOGIN_LINK; 
 	@EJB
 	IdentityDAORemote identityDAORemote;
 
 	public RegisterBean() {
 		registerDTO = new RegisterDTO();
+		LOGIN_LINK = Links.LOGIN_LINK;
 	}
 	
 	public IdentityDTO getIdentityDTO() {
@@ -44,6 +45,14 @@ public class RegisterBean {
 		this.registerDTO = registerDTO;
 	}
 	
+	public String getLOGIN_LINK() {
+		return LOGIN_LINK;
+	}
+
+	public void setLOGIN_LINK(String lOGIN_LINK) {
+		LOGIN_LINK = lOGIN_LINK;
+	}
+
 	public String registerIdentity() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -57,7 +66,7 @@ public class RegisterBean {
 			
 			identityDAORemote.registerIdentity(registerDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", registerDTO);
-			return Links.USER_MAIN_LINK;
+			return Links.USER_HOME_LINK;
 
 		} catch (Exception e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>

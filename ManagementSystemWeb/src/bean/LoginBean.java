@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -19,12 +21,13 @@ public class LoginBean {
 
 	IdentityDTO identityDTO;
 	LoginDTO loginDTO;
-	
+	String REGISTER_LINK;
 	@EJB
 	IdentityDAORemote identityDAORemote;
 	
 	public LoginBean() {
 		loginDTO = new LoginDTO();
+		REGISTER_LINK = Links.REGISTER_LINK; 
 	}
 	
 	public LoginDTO getLoginDTO() {
@@ -43,6 +46,14 @@ public class LoginBean {
 		this.identityDTO = identityDTO;
 	}
 	
+	public String getREGISTER_LINK() {
+		return REGISTER_LINK;
+	}
+
+	public void setREGISTER_LINK(String rEGISTER_LINK) {
+		REGISTER_LINK = rEGISTER_LINK;
+	}
+
 	public String loginIdentity() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -50,7 +61,7 @@ public class LoginBean {
 			identityDTO = identityDAORemote.loginIdentity(loginDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
 			
-			return Links.ADMIN_MAIN_LINK;
+			return Links.ADMIN_HOME_LINK;
 			//"/adminFilter/admin.xhtml?faces-redirect=true";
 		} catch (LoginException e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>

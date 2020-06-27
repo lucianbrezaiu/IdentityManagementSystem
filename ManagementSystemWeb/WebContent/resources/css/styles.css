@@ -1,0 +1,8 @@
+h1{
+    -webkit-text-fill-color: #000066;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 35px;
+    font-family: 'Times New Roman';
+    display: inline;
+}
