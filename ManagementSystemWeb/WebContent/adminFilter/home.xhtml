@@ -23,10 +23,10 @@
 	<b:navBar class="navbar">
 		<div class="container-fluid">
 		   <ul class="nav float-left">
-		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{adminBean.ADMIN_HOME_LINK}" value="Home"/></li>
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{adminBean.ADMIN_ORGANISATIONS_LINK}" value="Organizations"/></li>
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{adminBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{adminBean.ADMIN_ROLES_LINK}" value="Roles"/></li>
+		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Home"/></li>
+		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ORGANISATIONS_LINK}" value="Organizations"/></li>
+		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
+		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ROLES_LINK}" value="Roles"/></li>
 		   </ul>
 		   
 		   <div class="float-right" style="margin-right: 45px;">
@@ -36,7 +36,7 @@
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				        <h:form>
-				        	<h:commandButton class="dropdown-item" value="Logout" action="#{adminBean.logout}"></h:commandButton>
+				        	<h:commandButton class="dropdown-item" value="Logout" action="#{loginBean.logout}"></h:commandButton>
 				        </h:form>
 			       	</div>
 			    </div>
@@ -48,7 +48,7 @@
 	<h1>Identities</h1>
 	<br/>
 	
-	<h:dataTable value = "#{adminBean.identityDAORemote.findAll()}" var = "identity" styleClass = "table table-hover table-striped" headerClass = "identitiesTableHeader">
+	<h:dataTable value="#{adminBean.identityDAORemote.findAll()}" var="identity" styleClass="table table-hover table-striped">
 	   <h:column>    				
 	      <f:facet name = "header">Email</f:facet>    				
 	      #{identity.email}

@@ -11,22 +11,22 @@ import javax.faces.context.FacesContext;
 import dao.IdentityDAORemote;
 import dto.IdentityDTO;
 import dto.RegisterDTO;
-import links.Links;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
 @SessionScoped
 public class RegisterBean {
 
-	IdentityDTO identityDTO;
-	RegisterDTO registerDTO;
-	String LOGIN_LINK; 
+	private IdentityDTO identityDTO;
+	private RegisterDTO registerDTO;
+	private LinksBean linksBean;
+	
 	@EJB
 	IdentityDAORemote identityDAORemote;
 
 	public RegisterBean() {
 		registerDTO = new RegisterDTO();
-		LOGIN_LINK = Links.LOGIN_LINK;
+		linksBean = new LinksBean();
 	}
 	
 	public IdentityDTO getIdentityDTO() {
@@ -45,14 +45,6 @@ public class RegisterBean {
 		this.registerDTO = registerDTO;
 	}
 	
-	public String getLOGIN_LINK() {
-		return LOGIN_LINK;
-	}
-
-	public void setLOGIN_LINK(String lOGIN_LINK) {
-		LOGIN_LINK = lOGIN_LINK;
-	}
-
 	public String registerIdentity() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -66,7 +58,7 @@ public class RegisterBean {
 			
 			identityDAORemote.registerIdentity(registerDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", registerDTO);
-			return Links.USER_HOME_LINK;
+			return linksBean.getUSER_HOME_LINK();
 
 		} catch (Exception e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>

@@ -10,22 +10,22 @@ import dao.IdentityDAORemote;
 import dto.IdentityDTO;
 import dto.LoginDTO;
 import exception.LoginException;
-import links.Links;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
 @SessionScoped
 public class LoginBean {
 
-	IdentityDTO identityDTO;
-	LoginDTO loginDTO;
-	String REGISTER_LINK;
+	private IdentityDTO identityDTO;
+	private LoginDTO loginDTO;
+	private LinksBean linksBean;
+	
 	@EJB
-	IdentityDAORemote identityDAORemote;
+	private IdentityDAORemote identityDAORemote;
 	
 	public LoginBean() {
 		loginDTO = new LoginDTO();
-		REGISTER_LINK = Links.REGISTER_LINK; 
+		linksBean = new LinksBean();
 	}
 	
 	public LoginDTO getLoginDTO() {
@@ -44,27 +44,26 @@ public class LoginBean {
 		this.identityDTO = identityDTO;
 	}
 	
-	public String getREGISTER_LINK() {
-		return REGISTER_LINK;
-	}
-
-	public void setREGISTER_LINK(String rEGISTER_LINK) {
-		REGISTER_LINK = rEGISTER_LINK;
-	}
-
-	public String loginIdentity() {
+	public String login() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		try {
 			identityDTO = identityDAORemote.loginIdentity(loginDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
 			
-			return Links.ADMIN_HOME_LINK;
-			//"/adminFilter/admin.xhtml?faces-redirect=true";
+			return linksBean.getADMIN_HOME_LINK();
 		} catch (LoginException e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
 			facesContext.addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.message(), null));
 			return null;
 		}
+	}
+	
+	public String logout() {
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.getExternalContext().invalidateSession();
+		System.out.println("Trying to logout ...");
+		return linksBean.getLOGIN_LINK();
 	}
 }

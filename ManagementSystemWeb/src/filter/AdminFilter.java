@@ -11,8 +11,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.LinksBean;
 import bean.LoginBean;
-import links.Links;
 
 @WebFilter("/adminFilter/*")
 public class AdminFilter implements Filter {
@@ -24,16 +24,18 @@ public class AdminFilter implements Filter {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
+		LinksBean linksBean = new LinksBean();
+		
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			if(loginBean.getIdentityDTO().getUsername().equals("admin")) {
 				// todo: check if authenticated user has the admin role in this organization
 				filterChain.doFilter(servletRequest, servletResponse);
 			}else {
-				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + Links.USER_HOME_LINK);
+				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getUSER_HOME_LINK());
 			}
 		} else {
-			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + Links.LOGIN_LINK);
+			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getLOGIN_LINK());
 		}
 	}
 
