@@ -15,8 +15,8 @@
 		crossorigin="anonymous"
 	/>
 	<h:outputStylesheet library="css" name="styles.css"/>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/> 
 	<h:outputStylesheet library="css" name="userFilter.css"/>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/> 
 </h:head>
 <h:body>
 
@@ -47,6 +47,36 @@
 			</div>
 		</div>
 	</b:navBar>
+	
+	<br/>
+	<br/>
+	<div class="container-fluid">
+		<div class="form-group w-25">
+			<h:outputLabel value="First name: "/>
+			<h:inputText class="form-control" value="#{userBean.authenticatedIdentity.firstname}" readonly="true"></h:inputText>
+			<br />
+		</div>
+		<div class="form-group w-25">
+			<h:outputLabel value="Last name:"/>
+			<h:inputText class="form-control" value="#{userBean.authenticatedIdentity.lastname}" readonly="true"></h:inputText>
+			<br />
+		</div>
+		<div class="form-group w-25">
+			<h:outputLabel value="Email:"/>
+			<h:inputText class="form-control" value="#{userBean.authenticatedIdentity.email}" readonly="true"></h:inputText>
+			<br />
+		</div>
+		<div class="form-group w-25">
+			<h:outputLabel value="Username:"/>
+			<h:inputText class="form-control" value="#{userBean.authenticatedIdentity.username}" readonly="true"></h:inputText>
+			<br />
+		</div>
+		<div class="form-group w-25">
+			<h:outputLabel value="Organization"/>
+			<h:inputText class="form-control" value="#{userBean.getCurrentIdentityOrganization()}" readonly="true"></h:inputText>
+			<br />
+		</div>
+	</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

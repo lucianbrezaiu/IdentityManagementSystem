@@ -8,7 +8,9 @@ import javax.faces.context.FacesContext;
 import bean.LoginBean;
 import bean.RegisterBean;
 import dao.IdentityDAORemote;
+import dao.OrganizationDAORemote;
 import dto.IdentityDTO;
+import dto.OrganizationDTO;
 import util.IdpRole;
 
 @SuppressWarnings("deprecation")
@@ -18,6 +20,8 @@ public class UserBean {
 
 	@EJB
 	private IdentityDAORemote identityDAORemote;
+	@EJB
+	private OrganizationDAORemote organizationDAORemote;
 	private IdentityDTO authenticatedIdentity;
 	
 	public UserBean() {
@@ -49,5 +53,10 @@ public class UserBean {
 	
 	public String getCurrentFullname() {
 		return String.format("%s %s", authenticatedIdentity.getFirstname(),authenticatedIdentity.getLastname());
+	}
+	
+	public String getCurrentIdentityOrganization() {
+		OrganizationDTO organization = organizationDAORemote.findByIdentity(authenticatedIdentity.getId());
+		return organization.getName();
 	}
 }

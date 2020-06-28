@@ -22,6 +22,9 @@
 		<h1>Welcome to Identity Management System!</h1>
 		<br />
 		<br />
+		<h1>Login:</h1>
+		<br />
+		<br />
 		
 		<div class="form-group col-xs-4 col-sm-2">
 			Or redirect to 
@@ -30,7 +33,7 @@
 		
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="Username:"/>
-			<h:inputText class="effect-input" required="true" label="Username"
+			<h:inputText class="form-control" required="true" label="Username"
 				placeholder="Username" validatorMessage="Enter username"
 				value="#{loginBean.loginDTO.username}"></h:inputText>
 			<br />
@@ -38,7 +41,7 @@
 		
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="Password:"/>
-			<h:inputSecret class="effect-input" label="Password" required="true"
+			<h:inputSecret class="form-control" label="Password" required="true"
 				placeholder="Password" validatorMessage="Enter password"
 				value="#{loginBean.loginDTO.password}"></h:inputSecret>
 			<br />

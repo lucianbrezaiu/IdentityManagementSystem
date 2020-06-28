@@ -9,4 +9,6 @@ public interface OrganizationDAORemote extends GenericDAO<OrganizationDTO> {
 	OrganizationDTO findByName(String name);
 
 	OrganizationDTO findByCui(String name);
+	
+	OrganizationDTO findByIdentity(int identityId);
 }

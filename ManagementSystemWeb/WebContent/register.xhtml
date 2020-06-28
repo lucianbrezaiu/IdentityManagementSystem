@@ -12,10 +12,11 @@
 </h:head>
 <h:body>
 
-	Welcome to Identity Management System!
 
 	<h:form label="registerForm" class="form">
 		<h1>Welcome to Identity Management System!</h1>
+		<br />
+		<br />
 		<h1>Register:</h1>
 		<br />
 		<br />
@@ -27,7 +28,7 @@
 		
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="Email:"/>
-			<h:inputText class="effect-input" required="true" label="Email"
+			<h:inputText class="form-control" required="true" label="Email"
 				placeholder="Email" validatorMessage="Enter email"
 				type="email" 	value="#{registerBean.registerDTO.email}"></h:inputText>
 			<br />
@@ -35,7 +36,7 @@
 		
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="First name:"/>
-			<h:inputText class="effect-input" required="true" label="First name"
+			<h:inputText class="form-control" required="true" label="First name"
 				placeholder="First name" validatorMessage="Enter firstname"
 				value="#{registerBean.registerDTO.firstname}"></h:inputText>
 			<br />
@@ -43,7 +44,7 @@
 		
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="Last name:"/>
-			<h:inputText class="effect-input" required="true" label="Last name"
+			<h:inputText class="form-control" required="true" label="Last name"
 				placeholder="Last name" validatorMessage="Enter lastname"
 				value="#{registerBean.registerDTO.lastname}"></h:inputText>
 			<br />
@@ -51,7 +52,7 @@
 		
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="Password:"/>
-			<h:inputSecret class="effect-input" label="Password" required="true"
+			<h:inputSecret class="form-control" label="Password" required="true"
 				placeholder="Password" validatorMessage="Enter password"
 				value="#{registerBean.registerDTO.password}"></h:inputSecret>
 			<br />

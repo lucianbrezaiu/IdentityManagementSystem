@@ -10,8 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dto.IdentityDTO;
 import dto.OrganizationDTO;
 import dto.RoleDTO;
+import model.Identity;
 import model.Organization;
 import model.Role;
 import util.DTOToEntity;
@@ -100,5 +102,16 @@ public class OrganizationDAO implements OrganizationDAORemote {
 			return null;
 		}
 	}
-
+	
+	@Override
+	public OrganizationDTO findByIdentity(int identityId) {
+		try {
+			Identity identity = entityManager.find(Identity.class, identityId);
+			Organization organization = identity.getOrganization();
+			return entityToDTO.convertOrganization(organization);
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
 }
