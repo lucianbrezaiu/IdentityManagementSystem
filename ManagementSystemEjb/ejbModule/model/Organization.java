@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
-
+import javax.persistence.CascadeType;
 
 /**
  * The persistent class for the organization database table.
@@ -11,8 +11,9 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Organization.findAll", query="SELECT o FROM Organization o")
-@NamedQuery(name = "findOrganizationByName", query = "SELECT o FROM Organization o WHERE o.organizationName = :name")
 @NamedQuery(name = "findOrganizationByCUI", query = "SELECT o FROM Organization o WHERE o.cui = :cui")
+@NamedQuery(name = "findOrganizationById", query = "SELECT o FROM Organization o WHERE o.organizationId = :id")
+@NamedQuery(name = "findOrganizationByName", query = "SELECT o FROM Organization o WHERE o.organizationName = :name")
 public class Organization implements Serializable {
 	private static final long serialVersionUID = 1L;
 

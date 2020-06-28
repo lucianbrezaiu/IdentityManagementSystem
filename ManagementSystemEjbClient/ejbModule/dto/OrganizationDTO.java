@@ -41,4 +41,5 @@ public class OrganizationDTO {
 	public String toString() {
 		return "OrganizationDTO [id=" + id + ", name=" + name + ", cui=" + cui + "]";
 	}
+
 }

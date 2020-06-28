@@ -10,9 +10,16 @@ public class IdentityDTO implements Serializable {
 	private String email;
 	private String firstname;
 	private String lastname;
-
+	private int organizationId;
+	
 	public IdentityDTO() {
 		super();
+	}
+
+	public IdentityDTO(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public int getId() {
@@ -63,16 +70,18 @@ public class IdentityDTO implements Serializable {
 		this.lastname = lastname;
 	}
 
-	public IdentityDTO(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
+	public int getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(int organizationId) {
+		this.organizationId = organizationId;
 	}
 
 	@Override
 	public String toString() {
 		return "IdentityDTO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", firstName=" + firstname + ", lastName=" + lastname + "]";
+				+ ", firstname=" + firstname + ", lastname=" + lastname + ", organizationId=" + organizationId + "]";
 	}
 }
 

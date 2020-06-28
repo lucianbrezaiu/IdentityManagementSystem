@@ -23,7 +23,7 @@ public class UserFilter implements Filter {
 
 	@EJB
 	private IdentityDAORemote identityDAORemote;
-	
+
 	public IdentityDAORemote getIdentityDAORemote() {
 		return identityDAORemote;
 	}
@@ -31,29 +31,29 @@ public class UserFilter implements Filter {
 	public void setIdentityDAORemote(IdentityDAORemote identityDAORemote) {
 		this.identityDAORemote = identityDAORemote;
 	}
-	
+
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
-		
+
 		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
 		LinksBean linksBean = new LinksBean();
-		
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
-			String username = loginBean.getIdentityDTO().getUsername();
-			if(identityDAORemote.hasRoleInIdentitySystem(username,IdpRole.idp_member)) {
+			int identityId = loginBean.getIdentityDTO().getId();
+			if (identityDAORemote.hasRoleInIdentitySystem(identityId, IdpRole.idp_member)) {
 				filterChain.doFilter(servletRequest, servletResponse);
-			}else {
-				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getNOT_AUTHORIZED_LINK());
+			} else {
+				httpServletResponse
+						.sendRedirect(httpServletRequest.getContextPath() + linksBean.getNOT_AUTHORIZED_LINK());
 			}
 		} else {
 			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getLOGIN_LINK());
 		}
 	}
-	
+
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 	}

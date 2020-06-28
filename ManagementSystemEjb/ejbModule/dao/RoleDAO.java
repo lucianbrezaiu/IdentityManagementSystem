@@ -11,8 +11,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import dto.IdentityDTO;
+import dto.RightDTO;
 import dto.RoleDTO;
 import model.Identity;
+import model.Resource;
+import model.Right;
 import model.Role;
 import util.DTOToEntity;
 import util.EntityToDTO;
@@ -41,7 +44,7 @@ public class RoleDAO implements RoleDAORemote {
 
 	@Override
 	public List<RoleDTO> findAll() {
-		Query query = entityManager.createQuery("SELECT role FROM Role role");
+		Query query = entityManager.createNamedQuery("Role.findAll", Role.class);
 		@SuppressWarnings("unchecked")
 		List<Role> roles = query.getResultList();
 		List<RoleDTO> rolesDTO = new ArrayList<>();
@@ -54,6 +57,16 @@ public class RoleDAO implements RoleDAORemote {
 	@Override
 	public RoleDTO create(RoleDTO roleDTO) {
 		Role role = DTOToEntity.convertRole(roleDTO);
+		
+		List<Right> rights = new ArrayList<Right>();
+		for (RightDTO rightDTO : roleDTO.getDtoRights()) {
+			int id = rightDTO.getId();
+			Right right = entityManager.createNamedQuery("findRightById", Right.class).setParameter("id", id).getSingleResult();
+			System.out.println("->" + right.getRightName() + " - " + right.getRightDescription());
+			rights.add(right);
+		}
+		
+		role.setRights(rights);
 		entityManager.persist(role);
 		entityManager.flush();
 		roleDTO.setId(role.getRoleId());

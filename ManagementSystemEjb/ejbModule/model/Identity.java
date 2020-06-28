@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,6 +13,8 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Identity.findAll", query="SELECT i FROM Identity i")
+@NamedQuery(name = "findIdentityById", query = "SELECT i FROM Identity i WHERE i.identityId = :id")
+@NamedQuery(name = "findIdentityByEmail", query = "SELECT i FROM Identity i WHERE i.email = :email")
 @NamedQuery(name = "findIdentityByUsername", query = "SELECT i FROM Identity i WHERE i.username = :username")
 public class Identity implements Serializable {
 	private static final long serialVersionUID = 1L;

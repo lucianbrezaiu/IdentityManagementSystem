@@ -8,9 +8,9 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class LinksBean {
 
-	private String LOGIN_LINK = "/login.xhtml";
+	private String LOGIN_LINK = "/login.xhtml?faces-redirect=true";
 	
-	private String REGISTER_LINK = "/register.xhtml";
+	private String REGISTER_LINK = "/register.xhtml?faces-redirect=true";
 		
 	private String NOT_AUTHORIZED_LINK = "/notAuthorized.xhtml";
 	

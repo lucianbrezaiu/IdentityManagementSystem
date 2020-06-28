@@ -23,22 +23,16 @@ public class UserBean {
 	@EJB
 	private OrganizationDAORemote organizationDAORemote;
 	private IdentityDTO authenticatedIdentity;
-	
+
 	public UserBean() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		
+
 		LoginBean loginBean = (LoginBean) facesContext.getExternalContext().getSessionMap().get("loginBean");
-		if(loginBean!=null && loginBean.getIdentityDTO()!= null) {
+		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			authenticatedIdentity = loginBean.getIdentityDTO();
-		}
-		else {
-			RegisterBean register = (RegisterBean) facesContext.getExternalContext().getSessionMap().get("registerBean");
-			if(register!=null && register.getIdentityDTO()!= null) {
-				authenticatedIdentity = register.getIdentityDTO();
-			}
-		}
+		} 
 	}
-	
+
 	public IdentityDTO getAuthenticatedIdentity() {
 		return authenticatedIdentity;
 	}
@@ -47,16 +41,17 @@ public class UserBean {
 		this.authenticatedIdentity = authenticatedIdentity;
 	}
 
-	public boolean isAdmin(){
-		return identityDAORemote.hasRoleInIdentitySystem(authenticatedIdentity.getUsername(), IdpRole.idp_admin);
+	public boolean isAdmin() {
+		return identityDAORemote.hasRoleInIdentitySystem(authenticatedIdentity.getId(), IdpRole.idp_admin);
 	}
-	
+
 	public String getCurrentFullname() {
-		return String.format("%s %s", authenticatedIdentity.getFirstname(),authenticatedIdentity.getLastname());
+		return String.format("%s %s", authenticatedIdentity.getFirstname(), authenticatedIdentity.getLastname());
 	}
-	
-	public String getCurrentIdentityOrganization() {
-		OrganizationDTO organization = organizationDAORemote.findByIdentity(authenticatedIdentity.getId());
+
+	public String getCurrentOrganization() {
+		int organizationId = authenticatedIdentity.getOrganizationId();
+		OrganizationDTO organization = organizationDAORemote.findById(organizationId);
 		return organization.getName();
 	}
 }

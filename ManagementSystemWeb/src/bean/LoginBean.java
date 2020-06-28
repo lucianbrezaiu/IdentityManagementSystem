@@ -48,9 +48,9 @@ public class LoginBean {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		try {
+			//identityDTO is the current identity and it is called is UserBean, that's why it is initialized here
 			identityDTO = identityDAORemote.loginIdentity(loginDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
-			
 			return linksBean.getADMIN_HOME_LINK();
 		} catch (LoginException e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
@@ -63,7 +63,7 @@ public class LoginBean {
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.getExternalContext().invalidateSession();
-		System.out.println("Trying to logout ...");
+		System.out.println(String.format("The user %s has logged out successfully.", identityDTO.getUsername()));
 		return linksBean.getLOGIN_LINK();
 	}
 }

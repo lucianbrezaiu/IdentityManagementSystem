@@ -12,6 +12,7 @@ import javax.persistence.Query;
 
 import dto.OrganizationDTO;
 import dto.ResourceDTO;
+import model.Identity;
 import model.Organization;
 import model.Resource;
 import model.Role;
@@ -42,7 +43,7 @@ public class ResourceDAO implements ResourceDAORemote {
 
 	@Override
 	public List<ResourceDTO> findAll() {
-		Query query = entityManager.createQuery("SELECT resource FROM Resource resource");
+		Query query = entityManager.createNamedQuery("Resource.findAll", Resource.class);
 		@SuppressWarnings("unchecked")
 		List<Resource> resources = query.getResultList();
 		List<ResourceDTO> resourcesDTO = new ArrayList<>();

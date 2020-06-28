@@ -15,7 +15,7 @@ public interface IdentityDAORemote extends GenericDAO<IdentityDTO>{
 	
 	IdentityDTO registerIdentity(RegisterDTO registerDTO) throws RegisterException;
 	
-	boolean hasRoleInIdentitySystem(String username, IdpRole roleName);
+	boolean hasRoleInIdentitySystem(int identityId, IdpRole role);
 	
 	void addMemberRoleInIdentitySystem(String username);
 	

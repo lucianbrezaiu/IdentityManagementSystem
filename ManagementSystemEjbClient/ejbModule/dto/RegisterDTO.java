@@ -6,6 +6,7 @@ public class RegisterDTO {
 	private String password;
 	private String firstname;
 	private String lastname;
+	private int organizationId;
 
 	public RegisterDTO() {
 		super();
@@ -51,9 +52,11 @@ public class RegisterDTO {
 		this.lastname = lastname;
 	}
 
-	@Override
-	public String toString() {
-		return "RegisterDTO [email=" + email + ", password=" + password + ", firstName=" + firstname + ", lastName="
-				+ lastname + "]";
+	public int getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(int organizationId) {
+		this.organizationId = organizationId;
 	}
 }

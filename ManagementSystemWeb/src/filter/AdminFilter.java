@@ -43,10 +43,10 @@ public class AdminFilter implements Filter {
 		
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
-			String username = loginBean.getIdentityDTO().getUsername();
-			if(identityDAORemote.hasRoleInIdentitySystem(username,IdpRole.idp_admin)) {
+			int identityId = loginBean.getIdentityDTO().getId();
+			if(identityDAORemote.hasRoleInIdentitySystem(identityId,IdpRole.idp_admin)) {
 				filterChain.doFilter(servletRequest, servletResponse);
-			}else if(identityDAORemote.hasRoleInIdentitySystem(username,IdpRole.idp_member)){
+			}else if(identityDAORemote.hasRoleInIdentitySystem(identityId,IdpRole.idp_member)){
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getUSER_HOME_LINK());
 			}else {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getNOT_AUTHORIZED_LINK());

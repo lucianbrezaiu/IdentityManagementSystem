@@ -63,7 +63,7 @@ CREATE TABLE `identityroleresource` (
   CONSTRAINT `FK_IDENTITYROLERESOURCES_ROLE` FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
 
-//seed
+
 
 SET SQL_SAFE_UPDATES = 0;
 delete from managementsystem.identityroleresource;
@@ -129,6 +129,8 @@ insert into managementsystem.identityroleresource(identityId,roleId,resourceId) 
 (1,1,4),
 (1,2,4),
 (2,2,4),
+(2,3,2),
+(2,4,2),
 (3,2,4),
 (4,2,4),
 (5,2,4);

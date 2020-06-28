@@ -37,19 +37,20 @@ public class OrganizationDAO implements OrganizationDAORemote {
 	
 	@Override
 	public OrganizationDTO findById(int id) {
-		Organization organization = entityManager.find(Organization.class, id);
+		Organization organization = entityManager.createNamedQuery("findOrganizationById", Organization.class)
+				.setParameter("id", id).getSingleResult();
 		OrganizationDTO organizationDTO = entityToDTO.convertOrganization(organization);
 		return organizationDTO;
 	}
 
 	@Override
 	public List<OrganizationDTO> findAll() {
-		Query query = entityManager.createQuery("SELECT organization FROM Organization organization");
+		Query query = entityManager.createNamedQuery("Organization.findAll", Organization.class);
 		@SuppressWarnings("unchecked")
 		List<Organization> organizations = query.getResultList();
 		List<OrganizationDTO> organizationsDTO = new ArrayList<>();
-		for (Organization identity : organizations) {
-			organizationsDTO.add(entityToDTO.convertOrganization(identity));
+		for (Organization organization : organizations) {
+			organizationsDTO.add(entityToDTO.convertOrganization(organization));
 		}
 		return organizationsDTO;
 	}
@@ -97,18 +98,6 @@ public class OrganizationDAO implements OrganizationDAORemote {
 					.setParameter("cui", cui).getSingleResult();
 			OrganizationDTO organizationDTO = entityToDTO.convertOrganization(organization);
 			return organizationDTO;
-		}
-		catch(Exception e) {
-			return null;
-		}
-	}
-	
-	@Override
-	public OrganizationDTO findByIdentity(int identityId) {
-		try {
-			Identity identity = entityManager.find(Identity.class, identityId);
-			Organization organization = identity.getOrganization();
-			return entityToDTO.convertOrganization(organization);
 		}
 		catch(Exception e) {
 			return null;

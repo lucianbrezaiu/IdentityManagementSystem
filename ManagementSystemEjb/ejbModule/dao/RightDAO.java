@@ -10,8 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dto.IdentityDTO;
 import dto.RightDTO;
 import dto.RoleDTO;
+import model.Identity;
 import model.Right;
 import model.Role;
 import util.DTOToEntity;
@@ -36,13 +38,15 @@ public class RightDAO implements RightDAORemote {
 	
 	@Override
 	public RightDTO findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Right Right = entityManager.createNamedQuery("findRightById", Right.class)
+				.setParameter("id", id).getSingleResult();
+		RightDTO rightDTO = entityToDTO.convertRight(Right);
+		return rightDTO;
 	}
 
 	@Override
 	public List<RightDTO> findAll() {
-		Query query = entityManager.createQuery("SELECT r FROM Right r");
+		Query query = entityManager.createNamedQuery("Right.findAll", Right.class);
 		@SuppressWarnings("unchecked")
 		List<Right> rights = query.getResultList();
 		List<RightDTO> rightsDTO = new ArrayList<>();

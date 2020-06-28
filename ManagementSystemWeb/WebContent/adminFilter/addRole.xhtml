@@ -80,6 +80,16 @@
 		</div>
 		
 		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="Rights:"/>
+			<h:selectManyCheckbox id="selectManyCheckbox" layout="pageDirection"
+				required="true" selectedClass="form-group" unselectedClass="inline-label"
+				value="#{rolesBean.selectedRightsIds}">
+			 	<f:selectItems  value="#{rolesBean.getAllRights()}" var="right" itemLabel="#{right.name}" itemValue="#{right.id}" />
+			</h:selectManyCheckbox>
+			<br/>
+		</div>
+		
+		<div class="form-group col-xs-4 col-sm-2">
 			<h:commandButton class="btn btn-dark float-right" value="Add" action="#{rolesBean.addRole}"></h:commandButton>
 			<br />
 		</div>
@@ -87,6 +97,9 @@
 		<!-- h:messages is used to display error messages from the current facesContext  -->
 		<h:messages infoStyle="color:darkgreen" errorStyle="color:darkred"></h:messages>
 	</h:form>
+	
+	
+	
 	
 </h:body>
 </html>

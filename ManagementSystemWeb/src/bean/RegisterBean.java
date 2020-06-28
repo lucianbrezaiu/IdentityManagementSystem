@@ -8,9 +8,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+
 import dao.IdentityDAORemote;
+import dao.OrganizationDAORemote;
 import dto.IdentityDTO;
 import dto.LoginDTO;
+import dto.OrganizationDTO;
 import dto.RegisterDTO;
 
 @SuppressWarnings("deprecation")
@@ -25,6 +28,9 @@ public class RegisterBean {
 	@EJB
 	IdentityDAORemote identityDAORemote;
 
+	@EJB
+	OrganizationDAORemote organizationDAORemote;
+	
 	public RegisterBean() {
 		registerDTO = new RegisterDTO();
 		linksBean = new LinksBean();
@@ -46,6 +52,10 @@ public class RegisterBean {
 		this.registerDTO = registerDTO;
 	}
 	
+	public List<OrganizationDTO> getOrganizations() {
+		return organizationDAORemote.findAll();
+	}
+	
 	public String registerIdentity() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -56,10 +66,9 @@ public class RegisterBean {
 					throw new Exception("Email already exist!");
 				}
 			}
-			
-			identityDTO = identityDAORemote.registerIdentity(registerDTO);
-			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
-			return linksBean.getUSER_HOME_LINK();
+			identityDAORemote.registerIdentity(registerDTO);
+			registerDTO = new RegisterDTO();
+			return linksBean.getLOGIN_LINK();
 		} catch (Exception e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
 			facesContext.addMessage("registerForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
