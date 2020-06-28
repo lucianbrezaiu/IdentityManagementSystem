@@ -66,9 +66,4 @@ public class LoginBean {
 		System.out.println("Trying to logout ...");
 		return linksBean.getLOGIN_LINK();
 	}
-	
-	public String getCurrentUser() {
-		IdentityDTO identity = identityDAORemote.findByUsername(identityDTO.getUsername());
-		return String.format("%s %s", identity.getFirstname(),identity.getLastname());
-	}
 }

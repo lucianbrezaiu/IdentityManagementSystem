@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import dao.IdentityDAORemote;
 import dto.IdentityDTO;
+import dto.LoginDTO;
 import dto.RegisterDTO;
 
 @SuppressWarnings("deprecation")
@@ -56,10 +57,9 @@ public class RegisterBean {
 				}
 			}
 			
-			identityDAORemote.registerIdentity(registerDTO);
-			facesContext.getExternalContext().getSessionMap().put("identityDTO", registerDTO);
+			identityDTO = identityDAORemote.registerIdentity(registerDTO);
+			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
 			return linksBean.getUSER_HOME_LINK();
-
 		} catch (Exception e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
 			facesContext.addMessage("registerForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));

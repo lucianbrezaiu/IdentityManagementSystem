@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.LinksBean;
 import bean.LoginBean;
 import dao.IdentityDAORemote;
+import util.IdpRole;
 
 @WebFilter("/userFilter/*")
 public class UserFilter implements Filter {
@@ -43,7 +44,7 @@ public class UserFilter implements Filter {
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			String username = loginBean.getIdentityDTO().getUsername();
-			if(identityDAORemote.hasRoleInIdentitySystem(username,"idp_member")) {
+			if(identityDAORemote.hasRoleInIdentitySystem(username,IdpRole.idp_member)) {
 				filterChain.doFilter(servletRequest, servletResponse);
 			}else {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getNOT_AUTHORIZED_LINK());

@@ -16,7 +16,6 @@ import javax.persistence.Query;
 import util.*;
 import dto.LoginDTO;
 import dto.RegisterDTO;
-import dto.RoleDTO;
 import model.Identity;
 import model.Identityroleresource;
 import model.Resource;
@@ -120,15 +119,17 @@ public class IdentityDAO implements IdentityDAORemote {
 	}
 	
 	@Override
-	public void registerIdentity(RegisterDTO registerDTO) throws RegisterException{
+	public IdentityDTO registerIdentity(RegisterDTO registerDTO) throws RegisterException{
 		LOGGER.log(Level.INFO, String.format(
 				"Trying to register %s with password %s.",
 				registerDTO.getEmail(),
 				registerDTO.getPassword()
-				));		
+				));	
+		
+		IdentityDTO identityDTO;
 		try {
 			String username = generateUsernameForEmail(registerDTO.getEmail());
-			IdentityDTO identityDTO = new IdentityDTO(username,registerDTO.getPassword());
+			identityDTO = new IdentityDTO(username,registerDTO.getPassword());
 			identityDTO.setEmail(registerDTO.getEmail());
 			identityDTO.setFirstname(registerDTO.getFirstname());
 			identityDTO.setLastname(registerDTO.getLastname());
@@ -138,6 +139,7 @@ public class IdentityDAO implements IdentityDAORemote {
 		} catch (Exception e) {
 			throw new RegisterException();
 		}
+		return identityDTO;
 	}
 	
 	private String generateUsernameForEmail(String email) {
@@ -149,7 +151,7 @@ public class IdentityDAO implements IdentityDAORemote {
 		return username;
 	}
 	
-	public boolean hasRoleInIdentitySystem(String username, String roleName) {
+	public boolean hasRoleInIdentitySystem(String username, IdpRole role) {
 		try {
 			Identity identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
 					.setParameter("username", username).getSingleResult();
@@ -158,7 +160,7 @@ public class IdentityDAO implements IdentityDAORemote {
 				
 				String dbRole = claim.getRole().getRoleName().trim();
 				String resourceName = claim.getResource().getResourceName().trim();
-				if(dbRole.equals(roleName) && resourceName.equals("Identity Management System")) {
+				if(dbRole.equals(role.name()) && resourceName.equals("Identity Management System")) {
 					return true;
 				}
 			}
@@ -174,7 +176,7 @@ public class IdentityDAO implements IdentityDAORemote {
 				.setParameter("username", username).getSingleResult();
 		
 		Role role = entityManager.createNamedQuery("findRoleByName", Role.class)
-				.setParameter("name", "idp_member").getSingleResult();
+				.setParameter("name", IdpRole.idp_member.name()).getSingleResult();
 	
 		Resource resource = entityManager.createNamedQuery("findResourceByName", Resource.class)
 				.setParameter("name", "Identity Management System").getSingleResult();
