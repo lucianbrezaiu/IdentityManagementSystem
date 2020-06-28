@@ -85,7 +85,6 @@ public class IdentityDAO implements IdentityDAORemote {
 		
 		entityManager.persist(identity);
 		entityManager.flush();
-		addMemberRoleInIdentitySystem(identity.getUsername());
 		identityDTO.setId(identity.getIdentityId());
 		return identityDTO;
 	}
@@ -159,48 +158,5 @@ public class IdentityDAO implements IdentityDAORemote {
 		String username = email.split("@")[0];
 		username += String.format("#%s",random.toString());
 		return username;
-	}
-	
-	public boolean hasRoleInIdentitySystem(int identityId, IdpRole role) {
-		try {
-			List<Identityroleresource> claims = entityManager
-					.createNamedQuery("getClaimsForIdentity", Identityroleresource.class)
-					.setParameter("id", identityId)
-					.getResultList();
-			
-			for (Identityroleresource claim : claims) {
-				String dbRole = claim.getRole().getRoleName().trim();
-				String resourceName = claim.getResource().getResourceName().trim();
-				if(dbRole.equals(role.name()) && resourceName.equals("Identity Management System")) {
-					return true;
-				}
-			}
-			return false;
-		}
-		catch(Exception e) {
-			return false;
-		}
-	}
-	
-	public void addMemberRoleInIdentitySystem(String username) {
-		Identity identity = entityManager.createNamedQuery("findIdentityByUsername", Identity.class)
-				.setParameter("username", username).getSingleResult();
-		
-		Role role = entityManager.createNamedQuery("findRoleByName", Role.class)
-				.setParameter("name", IdpRole.idp_member.name()).getSingleResult();
-	
-		Resource resource = entityManager.createNamedQuery("findResourceByName", Resource.class)
-				.setParameter("name", "Identity Management System").getSingleResult();
-		
-		Identityroleresource claim = new Identityroleresource(identity,role,resource);
-		
-		entityManager.persist(claim);
-		entityManager.flush();
-		LOGGER.log(Level.INFO, String.format(
-				"The user %s has been successfully registered and received the role %s in %s.",
-				username,
-				role.getRoleName(),
-				resource.getResourceName()
-				));	
 	}
 }

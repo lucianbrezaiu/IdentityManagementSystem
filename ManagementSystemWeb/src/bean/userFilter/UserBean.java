@@ -6,12 +6,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import bean.LoginBean;
-import bean.RegisterBean;
-import dao.IdentityDAORemote;
 import dao.OrganizationDAORemote;
+import dao.resources.IdentitySystemDAORemote;
 import dto.IdentityDTO;
 import dto.OrganizationDTO;
-import util.IdpRole;
+import util.RoleEnum;
 
 @SuppressWarnings("deprecation")
 @ManagedBean
@@ -19,7 +18,7 @@ import util.IdpRole;
 public class UserBean {
 
 	@EJB
-	private IdentityDAORemote identityDAORemote;
+	private IdentitySystemDAORemote identitySystemDAORemote;
 	@EJB
 	private OrganizationDAORemote organizationDAORemote;
 	private IdentityDTO authenticatedIdentity;
@@ -42,7 +41,7 @@ public class UserBean {
 	}
 
 	public boolean isAdmin() {
-		return identityDAORemote.hasRoleInIdentitySystem(authenticatedIdentity.getId(), IdpRole.idp_admin);
+		return identitySystemDAORemote.hasRoleInIdentitySystem(authenticatedIdentity.getId(), RoleEnum.administrator);
 	}
 
 	public String getCurrentFullname() {

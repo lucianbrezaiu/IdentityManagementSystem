@@ -51,6 +51,7 @@ public class LoginBean {
 			//identityDTO is the current identity and it is called is UserBean, that's why it is initialized here
 			identityDTO = identityDAORemote.loginIdentity(loginDTO);
 			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
+			loginDTO = new LoginDTO();
 			return linksBean.getADMIN_HOME_LINK();
 		} catch (LoginException e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>

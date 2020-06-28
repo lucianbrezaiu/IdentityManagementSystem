@@ -15,23 +15,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.LinksBean;
 import bean.LoginBean;
-import dao.IdentityDAORemote;
-import util.IdpRole;
+import dao.resources.IdentitySystemDAORemote;
+import util.RoleEnum;
 
 @WebFilter("/adminFilter/*")
 public class AdminFilter implements Filter {
 
 	@EJB
-	private IdentityDAORemote identityDAORemote;
-	
-	public IdentityDAORemote getIdentityDAORemote() {
-		return identityDAORemote;
+	private IdentitySystemDAORemote identitySystemDAORemote;
+
+	public IdentitySystemDAORemote getIdentitySystemDAORemote() {
+		return identitySystemDAORemote;
 	}
 
-	public void setIdentityDAORemote(IdentityDAORemote identityDAORemote) {
-		this.identityDAORemote = identityDAORemote;
+	public void setIdentitySystemDAORemote(IdentitySystemDAORemote identitySystemDAORemote) {
+		this.identitySystemDAORemote = identitySystemDAORemote;
 	}
-	
+
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
@@ -44,9 +44,9 @@ public class AdminFilter implements Filter {
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			int identityId = loginBean.getIdentityDTO().getId();
-			if(identityDAORemote.hasRoleInIdentitySystem(identityId,IdpRole.idp_admin)) {
+			if(identitySystemDAORemote.hasRoleInIdentitySystem(identityId,RoleEnum.administrator)) {
 				filterChain.doFilter(servletRequest, servletResponse);
-			}else if(identityDAORemote.hasRoleInIdentitySystem(identityId,IdpRole.idp_member)){
+			}else if(identitySystemDAORemote.hasRoleInIdentitySystem(identityId,RoleEnum.member)){
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getUSER_HOME_LINK());
 			}else {
 				httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + linksBean.getNOT_AUTHORIZED_LINK());

@@ -15,21 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.LinksBean;
 import bean.LoginBean;
-import dao.IdentityDAORemote;
-import util.IdpRole;
+import dao.resources.IdentitySystemDAORemote;
+import util.RoleEnum;
 
 @WebFilter("/userFilter/*")
 public class UserFilter implements Filter {
 
 	@EJB
-	private IdentityDAORemote identityDAORemote;
+	private IdentitySystemDAORemote identitySystemDAORemote;
 
-	public IdentityDAORemote getIdentityDAORemote() {
-		return identityDAORemote;
+	public IdentitySystemDAORemote getIdentitySystemDAORemote() {
+		return identitySystemDAORemote;
 	}
 
-	public void setIdentityDAORemote(IdentityDAORemote identityDAORemote) {
-		this.identityDAORemote = identityDAORemote;
+	public void setIdentitySystemDAORemote(IdentitySystemDAORemote identitySystemDAORemote) {
+		this.identitySystemDAORemote = identitySystemDAORemote;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class UserFilter implements Filter {
 		LoginBean loginBean = (LoginBean) httpServletRequest.getSession().getAttribute("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			int identityId = loginBean.getIdentityDTO().getId();
-			if (identityDAORemote.hasRoleInIdentitySystem(identityId, IdpRole.idp_member)) {
+			if (identitySystemDAORemote.hasRoleInIdentitySystem(identityId, RoleEnum.member)) {
 				filterChain.doFilter(servletRequest, servletResponse);
 			} else {
 				httpServletResponse

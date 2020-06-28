@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import dao.IdentityDAORemote;
 import dao.OrganizationDAORemote;
+import dao.resources.IdentitySystemDAORemote;
 import dto.IdentityDTO;
 import dto.LoginDTO;
 import dto.OrganizationDTO;
@@ -21,13 +22,16 @@ import dto.RegisterDTO;
 @SessionScoped
 public class RegisterBean {
 
-	private IdentityDTO identityDTO;
+
 	private RegisterDTO registerDTO;
 	private LinksBean linksBean;
 	
 	@EJB
 	IdentityDAORemote identityDAORemote;
 
+	@EJB
+	IdentitySystemDAORemote identitySystemDAORemote;
+	
 	@EJB
 	OrganizationDAORemote organizationDAORemote;
 	
@@ -36,14 +40,6 @@ public class RegisterBean {
 		linksBean = new LinksBean();
 	}
 	
-	public IdentityDTO getIdentityDTO() {
-		return identityDTO;
-	}
-
-	public void setIdentityDTO(IdentityDTO identityDTO) {
-		this.identityDTO = identityDTO;
-	}
-
 	public RegisterDTO getRegisterDTO() {
 		return registerDTO;
 	}
@@ -66,7 +62,8 @@ public class RegisterBean {
 					throw new Exception("Email already exist!");
 				}
 			}
-			identityDAORemote.registerIdentity(registerDTO);
+			IdentityDTO identity = identityDAORemote.registerIdentity(registerDTO);
+			identitySystemDAORemote.addMemberRoleInIdentitySystem(identity.getUsername());
 			registerDTO = new RegisterDTO();
 			return linksBean.getLOGIN_LINK();
 		} catch (Exception e) {

@@ -83,47 +83,51 @@ ALTER TABLE managementsystem.organization AUTO_INCREMENT = 1;
 
 insert into managementsystem.organization(organizationName,cui) values 
 ('IBM','34318904'),
-('Atos','98066608'),
+('BCR','98066608'),
 ('Waters','26167770'),
 ('IQuest','65785470'),
-('Siemens','21041892'),
-('Trimble','40820074'),
-('Essensys','59753264');
+('Microsoft','21041892'),
+('Essensys','59753264'),
+('Trimble','40820074');
 
 insert into managementsystem.identity(organizationId,username,email,password,firstName,lastName) values
 (1,'admin','admin@outlook.com','admin','admin','admin'),
-(7,'lucianbrezaiu#123','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu'),
-(5,'ion.mihnea#475','ion.mihnea@gmail.com','Copernic@1234','Alexandru-Mihnea','Ion'),
-(7,'an.vieru#792','an.vieru@gmail.com','Copernic@1234','Andreea','Vieru'),
-(7,'mihai#389','mihai@gmail.com','Copernic@1234','Mihai','Vilcu');
+(6,'lucianbrezaiu#123','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu'),
+(5,'mari#475','mari@gmail.com','Copernic@1234','Marian','Brezaiu'),
+(3,'andreea#792','andreeau@gmail.com','Copernic@1234','Andreea','Popescu'),
+(3,'bogdan#389','bogdan@gmail.com','Copernic@1234','Bogdan','Sandru');
 
 insert into managementsystem.role(roleName,roleDescription) values
-('idp_admin','administrator of identity mangement system'),
-('idp_member','member of identity mangement system'),
-('intranet_admin','administrator of resource intranet'),
-('intranet_member','member of resource intranet');
+('administrator','administrator of a resource'),
+('member','member of a resource'),
+('hr','hr of a resource'),
+('manager','manager of a resource'),
+('analyst','analyst of a resource');
 
 insert into managementsystem.right(rightName,rightDescription) values
-('create_organisations','create organisations in identity system'),
-('create_resources','create resources in identity system'),
-('create_roles','create roles in identity system'),
-('create_rights','create rights in identity system'),
-('see_profile','visualize profile in identity system'),
-('see_claims','visualize user claims in identity system');
+('create','create entities'),
+('read','read entities'),
+('update','update entities'),
+('delete','delete entities');
 
 insert into roleright(roleId,rightId) values
 (1,1),
 (1,2),
 (1,3),
 (1,4),
-(2,5),
-(2,6);
+(2,2),
+(3,1),
+(3,3),
+(3,3),
+(4,2),
+(5,1),
+(5,3);
 
 insert into managementsystem.resource(resourceName) values 
 ('Dox'),
 ('Intranet'),
 ('Condica'),
-('Identity Management System');
+('IdentityManagementSystem');
 
 insert into managementsystem.identityroleresource(identityId,roleId,resourceId) values 
 (1,1,4),
