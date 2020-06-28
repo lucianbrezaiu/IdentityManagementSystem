@@ -62,7 +62,6 @@ public class RoleDAO implements RoleDAORemote {
 		for (RightDTO rightDTO : roleDTO.getDtoRights()) {
 			int id = rightDTO.getId();
 			Right right = entityManager.createNamedQuery("findRightById", Right.class).setParameter("id", id).getSingleResult();
-			System.out.println("->" + right.getRightName() + " - " + right.getRightDescription());
 			rights.add(right);
 		}
 		

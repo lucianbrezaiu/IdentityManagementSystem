@@ -84,7 +84,6 @@ public class RolesBean {
 				rightDTO.setId(rightId);
 				dtoRights.add(rightDTO);
 			}
-			
 			roleDTO.setDtoRights(dtoRights);
 			roleDAORemote.create(roleDTO);
 			roleDTO = new RoleDTO();
@@ -94,5 +93,17 @@ public class RolesBean {
 			facesContext.addMessage("addRoleForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error! Please try again!", null));
 			return null;
 		}
+	}
+	
+	public String rightsToString(List<RightDTO> rightsDTO) {
+		if(rightsDTO.size()==0) {
+			return "";
+		}
+		
+		String str = "";
+		for (RightDTO rightDTO : rightsDTO) {
+			str += String.format("%s,", rightDTO.getName());
+		}
+		return str.substring(0, str.length() - 1);
 	}
 }

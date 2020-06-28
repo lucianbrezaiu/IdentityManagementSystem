@@ -5,6 +5,7 @@ public class OrganizationDTO {
 	private int id;
 	private String name;
 	private String cui;
+	private int nrIdentities;
 	
 	public OrganizationDTO() {
 		super();
@@ -35,6 +36,14 @@ public class OrganizationDTO {
 	}
 	public void setCui(String cui) {
 		this.cui = cui;
+	}
+
+	public int getNrIdentities() {
+		return nrIdentities;
+	}
+
+	public void setNrIdentities(int nrIdentities) {
+		this.nrIdentities = nrIdentities;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ public class IdentityDTO implements Serializable {
 	private String firstname;
 	private String lastname;
 	private int organizationId;
+	private String organizationName;
 	
 	public IdentityDTO() {
 		super();
@@ -78,10 +79,18 @@ public class IdentityDTO implements Serializable {
 		this.organizationId = organizationId;
 	}
 
+	public String getOrganizationName() {
+		return organizationName;
+	}
+
+	public void setOrganizationName(String organizationName) {
+		this.organizationName = organizationName;
+	}
+
 	@Override
 	public String toString() {
 		return "IdentityDTO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", firstname=" + firstname + ", lastname=" + lastname + ", organizationId=" + organizationId + "]";
+				+ ", firstname=" + firstname + ", lastname=" + lastname + "]";
 	}
 }
 

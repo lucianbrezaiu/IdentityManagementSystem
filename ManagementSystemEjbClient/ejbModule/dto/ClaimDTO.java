@@ -3,6 +3,7 @@ package dto;
 public class ClaimDTO {
 
 	private int id;
+	private String identityEmail;
 	private String roleName;
 	private String roleDescription;
 	private String resourceName;
@@ -12,13 +13,21 @@ public class ClaimDTO {
 	}
 
 	
-	public ClaimDTO(String roleName, String roleDescription, String resourceName) {
+	public ClaimDTO(String identityEmail, String roleName, String roleDescription, String resourceName) {
 		super();
+		this.identityEmail = identityEmail;
 		this.roleName = roleName;
 		this.roleDescription = roleDescription;
 		this.resourceName = resourceName;
 	}
 
+	public String getIdentityEmail() {
+		return identityEmail;
+	}
+
+	public void setIdentityEmail(String identityEmail) {
+		this.identityEmail = identityEmail;
+	}
 
 	public int getId() {
 		return id;

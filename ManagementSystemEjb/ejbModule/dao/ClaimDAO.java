@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import dto.ClaimDTO;
+import model.Identity;
 import model.Identityroleresource;
 import util.DTOToEntity;
 import util.EntityToDTO;
@@ -77,8 +78,8 @@ static final Logger LOGGER = Logger.getLogger(IdentityDAO.class.getName());
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		Identityroleresource claim = entityManager.find(Identityroleresource.class, id);
+		entityManager.remove(claim);
 		
 	}
-
 }
