@@ -98,7 +98,7 @@ public class IdentityDAO implements IdentityDAORemote {
 	@Override
 	public IdentityDTO loginIdentity(LoginDTO loginDTO) throws LoginException {
 		LOGGER.log(Level.INFO, String.format(
-				"Trying to login %s with password %s.",
+				"Login %s with password %s.",
 				loginDTO.getUsername(),
 				loginDTO.getPassword()
 				));
@@ -113,7 +113,7 @@ public class IdentityDAO implements IdentityDAORemote {
 		if (!loginDTO.getPassword().equals(identity.getPassword())) {
 			throw new LoginException();
 		}
-
+		LOGGER.log(Level.INFO, String.format("The user %s has been successfully logged in",loginDTO.getUsername()));	
 		IdentityDTO identityDTO = entityToDTO.convertIdentity(identity);
 		return identityDTO;
 	}
@@ -121,7 +121,7 @@ public class IdentityDAO implements IdentityDAORemote {
 	@Override
 	public IdentityDTO registerIdentity(RegisterDTO registerDTO) throws RegisterException{
 		LOGGER.log(Level.INFO, String.format(
-				"Trying to register %s with password %s.",
+				"Register %s with password %s.",
 				registerDTO.getEmail(),
 				registerDTO.getPassword()
 				));	
@@ -186,7 +186,7 @@ public class IdentityDAO implements IdentityDAORemote {
 		entityManager.persist(claim);
 		entityManager.flush();
 		LOGGER.log(Level.INFO, String.format(
-				"The user %s was successfully registered and received the role %s in %s.",
+				"The user %s has been successfully registered and received the role %s in %s.",
 				username,
 				role.getRoleName(),
 				resource.getResourceName()

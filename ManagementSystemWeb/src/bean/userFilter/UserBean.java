@@ -18,48 +18,36 @@ public class UserBean {
 
 	@EJB
 	private IdentityDAORemote identityDAORemote;
+	private IdentityDTO authenticatedIdentity;
 	
 	public UserBean() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 		
+		LoginBean loginBean = (LoginBean) facesContext.getExternalContext().getSessionMap().get("loginBean");
+		if(loginBean!=null && loginBean.getIdentityDTO()!= null) {
+			authenticatedIdentity = loginBean.getIdentityDTO();
+		}
+		else {
+			RegisterBean register = (RegisterBean) facesContext.getExternalContext().getSessionMap().get("registerBean");
+			if(register!=null && register.getIdentityDTO()!= null) {
+				authenticatedIdentity = register.getIdentityDTO();
+			}
+		}
 	}
 	
+	public IdentityDTO getAuthenticatedIdentity() {
+		return authenticatedIdentity;
+	}
+
+	public void setAuthenticatedIdentity(IdentityDTO authenticatedIdentity) {
+		this.authenticatedIdentity = authenticatedIdentity;
+	}
+
 	public boolean isAdmin(){
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		
-		LoginBean loginBean = (LoginBean) facesContext.getExternalContext().getSessionMap().get("loginBean");
-		if(loginBean!=null && loginBean.getIdentityDTO()!= null) {
-			IdentityDTO identity = loginBean.getIdentityDTO();
-			return identityDAORemote.hasRoleInIdentitySystem(identity.getUsername(), IdpRole.idp_admin);
-		}
-		
-		RegisterBean registerBean = (RegisterBean) facesContext.getExternalContext().getSessionMap().get("registerBean");
-		if(registerBean!=null && registerBean.getIdentityDTO()!= null) {
-			IdentityDTO identity = registerBean.getIdentityDTO();
-			System.out.println(identity);
-			return identityDAORemote.hasRoleInIdentitySystem(identity.getUsername(), IdpRole.idp_admin);
-		}
-		
-		return false;
+		return identityDAORemote.hasRoleInIdentitySystem(authenticatedIdentity.getUsername(), IdpRole.idp_admin);
 	}
 	
-	public String getUsername() {
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		
-		LoginBean loginBean = (LoginBean) facesContext.getExternalContext().getSessionMap().get("loginBean");
-		if(loginBean!=null && loginBean.getIdentityDTO()!= null) {
-			IdentityDTO identity = loginBean.getIdentityDTO();
-			return String.format("%s %s", identity.getFirstname(),identity.getLastname());
-		}
-		
-		RegisterBean register = (RegisterBean) facesContext.getExternalContext().getSessionMap().get("registerBean");
-		if(register!=null && register.getIdentityDTO()!= null) {
-			IdentityDTO identity = register.getIdentityDTO();
-			return String.format("%s %s", identity.getFirstname(),identity.getLastname());
-		}
-		
-		return "";
+	public String getCurrentFullname() {
+		return String.format("%s %s", authenticatedIdentity.getFirstname(),authenticatedIdentity.getLastname());
 	}
-	
 }

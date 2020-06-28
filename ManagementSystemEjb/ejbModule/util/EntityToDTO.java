@@ -36,4 +36,14 @@ public class EntityToDTO {
 		rightDTO.setId(right.getRightId());
 		return rightDTO;
 	}
+	
+	public ClaimDTO convertClaim(Identityroleresource claim) {
+		
+		Role role = claim.getRole();
+		Resource resource = claim.getResource();
+		
+		ClaimDTO claimDTO = new ClaimDTO(role.getRoleName(), role.getRoleDescription(),resource.getResourceName());
+		claimDTO.setId(claim.getId());
+		return claimDTO;
+	}
 }

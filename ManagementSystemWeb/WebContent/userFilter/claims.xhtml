@@ -7,27 +7,24 @@
 	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Admin module - resources</title>
+	<title>Management System - Claims</title>
 	<link 
 		rel="stylesheet" 
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
 		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
 		crossorigin="anonymous"
 	/>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/> 
 	<h:outputStylesheet library="css" name="styles.css"/>
-	<h:outputStylesheet library="css" name="adminFilter.css"/>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/> 
+	<h:outputStylesheet library="css" name="userFilter.css"/>
 </h:head>
 <h:body>
 
 	<b:navBar class="navbar">
 		<div class="container-fluid">
 		   <ul class="nav float-left">
-			 <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Home"/></li>
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ORGANIZATIONS_LINK}" value="Organizations"/></li>
-		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ROLES_LINK}" value="Roles"/></li>
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_RIGHTS_LINK}" value="Rights"/></li>
+		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.USER_HOME_LINK}" value="Home"/></li>
+		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.USER_CLAIMS_LINK}" value="Claims"/></li>
 		   </ul>
 		   
 		   <div class="float-right" style="margin-right: 45px;">
@@ -39,6 +36,9 @@
 			            <span class="glyphicon glyphicon-user"></span>
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			        	<h:panelGroup rendered="#{userBean.isAdmin()}">
+						    <h:link class="dropdown-item" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Administrator"/>
+						</h:panelGroup>
 				        <h:form>
 				        	<h:commandButton class="dropdown-item" value="Logout" action="#{loginBean.logout}"></h:commandButton>
 				        </h:form>
@@ -47,22 +47,27 @@
 			</div>
 		</div>
 	</b:navBar>
-
+	
 	<div class="container-fluid">
 		<div class="row align-items-center">
 			<div class="col">
-				<h1>Resources</h1>
-			</div>
-			<div class="col">
-				<h:link class="btn btn-danger btn-lg" value="Add resource" outcome="#{linksBean.ADMIN_ADD_RESOURCE_LINK}"/>
+				<h1>Claims</h1>
 			</div>
 		</div>
 	</div>
 	
-	<h:dataTable value="#{resourcesBean.getResources()}" var="organization" styleClass="table table-hover table-striped">
+	<h:dataTable value="#{claimsBean.getClaims()}" var="claim" styleClass="table table-hover table-striped">
+	    <h:column>    				
+	      <f:facet name = "header">Resource</f:facet>    				
+	      #{claim.resourceName}
+	   </h:column>
 	   <h:column>    				
-	      <f:facet name = "header">Name</f:facet>    				
-	      #{organization.name}
+	      <f:facet name = "header">Role name</f:facet>    				
+	      #{claim.roleName}
+	   </h:column>
+	   <h:column>    				
+	      <f:facet name = "header">Role description</f:facet>    				
+	      #{claim.roleDescription}
 	   </h:column>
 	</h:dataTable>
 	

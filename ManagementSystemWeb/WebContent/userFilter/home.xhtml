@@ -7,7 +7,7 @@
 	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Management System</title>
+	<title>Management System - Home</title>
 	<link 
 		rel="stylesheet" 
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
@@ -23,12 +23,13 @@
 	<b:navBar class="navbar">
 		<div class="container-fluid">
 		   <ul class="nav float-left">
-		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.USER_HOME_LINK}" value="Home"/></li>
+		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.USER_HOME_LINK}" value="Home"/></li>
+		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.USER_CLAIMS_LINK}" value="Claims"/></li>
 		   </ul>
 		   
 		   <div class="float-right" style="margin-right: 45px;">
 		   		<div class="username">
-			   		<h:link class="username" outcome="#{linksBean.USER_HOME_LINK}" value="#{userBean.getUsername()}"/>
+			   		<h:link class="username" outcome="#{linksBean.USER_HOME_LINK}" value="#{userBean.getCurrentFullname()}"/>
 			    </div>
 			 	<div id="dropDownList" class="btn-group">
 			        <a id="dropdown" class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="background-color: white">
