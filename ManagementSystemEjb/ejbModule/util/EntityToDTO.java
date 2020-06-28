@@ -1,13 +1,7 @@
 package util;
 
-import dto.IdentityDTO;
-import dto.OrganizationDTO;
-import dto.ResourceDTO;
-import dto.RoleDTO;
-import model.Identity;
-import model.Organization;
-import model.Resource;
-import model.Role;
+import dto.*;
+import model.*;
 
 public class EntityToDTO {
 
@@ -35,5 +29,11 @@ public class EntityToDTO {
 		RoleDTO roleDTO = new RoleDTO(role.getRoleName(), role.getRoleDescription());
 		roleDTO.setId(role.getRoleId());
 		return roleDTO;
+	}
+	
+	public RightDTO convertRight(Right right) {
+		RightDTO rightDTO = new RightDTO(right.getRightName(), right.getRightDescription());
+		rightDTO.setId(right.getRightId());
+		return rightDTO;
 	}
 }

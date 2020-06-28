@@ -7,13 +7,14 @@
 	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Admin module - add resource</title>
+	<title>Admin module - rights</title>
 	<link 
 		rel="stylesheet" 
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
 		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
 		crossorigin="anonymous"
 	/>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/> 
 	<h:outputStylesheet library="css" name="styles.css"/>
 	<h:outputStylesheet library="css" name="adminFilter.css"/>
 </h:head>
@@ -24,9 +25,9 @@
 		   <ul class="nav float-left">
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Home"/></li>
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ORGANIZATIONS_LINK}" value="Organizations"/></li>
-		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
+		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ROLES_LINK}" value="Roles"/></li>
-		      <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_RIGHTS_LINK}" value="Rights"/></li>
+		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_RIGHTS_LINK}" value="Rights"/></li>
 		   </ul>
 		   
 		   <div class="float-right" style="margin-right: 45px;">
@@ -46,39 +47,30 @@
 			</div>
 		</div>
 	</b:navBar>
-	
-	<br/>
+
 	<div class="container-fluid">
 		<div class="row align-items-center">
 			<div class="col">
-				<h1>Add resource:</h1>
+				<h1>Rights</h1>
 			</div>
 			<div class="col">
-				<h:link class="btn btn-danger btn-lg" value="BACK" outcome="#{linksBean.ADMIN_RESOURCES_LINK}"/>
+				<h:link class="btn btn-danger btn-lg" value="Add right" outcome="#{linksBean.ADMIN_ADD_RIGHT_LINK}"/>
 			</div>
 		</div>
 	</div>
 
-	<br/>
-	<br/>
-	<h:form label="addResourceForm" class="form">
+	<h:dataTable value="#{rightsBean.getRights()}" var="right" styleClass="table table-hover table-striped">
+	   <h:column>    				
+	      <f:facet name = "header">Name</f:facet>    				
+	      #{right.name}
+	   </h:column>
+	   <h:column>
+	      <f:facet name = "header">Description</f:facet>
+	      #{right.description}
+	   </h:column>
+	</h:dataTable>
 	
-		<div class="form-group col-xs-4 col-sm-2">
-			<h:outputLabel value="Name:"/>
-			<h:inputText class="effect-input" required="true" label="Name"
-				placeholder="Name" validatorMessage="Enter resource name"
-				value="#{resourcesBean.resourceDTO.name}"></h:inputText>
-			<br />
-		</div>
-		
-		<div class="form-group col-xs-4 col-sm-2">
-			<h:commandButton class="btn btn-dark float-right" value="Add" action="#{resourcesBean.addResource}"></h:commandButton>
-			<br />
-		</div>
-		
-		<!-- h:messages is used to display error messages from the current facesContext  -->
-		<h:messages infoStyle="color:darkgreen" errorStyle="color:darkred"></h:messages>
-	</h:form>
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </h:body>
 </html>

@@ -28,6 +28,10 @@ public class LinksBean {
 	
 	private String ADMIN_ADD_ROLE_LINK = "/adminFilter/addRole.xhtml?faces-redirect=true";
 	
+	private String ADMIN_RIGHTS_LINK = "/adminFilter/rights.xhtml?faces-redirect=true";
+	
+	private String ADMIN_ADD_RIGHT_LINK = "/adminFilter/addRight.xhtml?faces-redirect=true";
+	
 	private String USER_HOME_LINK = "/userFilter/home.xhtml";
 
 	public LinksBean() {
@@ -114,8 +118,24 @@ public class LinksBean {
 		ADMIN_ADD_ROLE_LINK = aDMIN_ADD_ROLE_LINK;
 	}
 
+	public String getADMIN_RIGHTS_LINK() {
+		return ADMIN_RIGHTS_LINK;
+	}
+
+	public void setADMIN_RIGHTS_LINK(String aDMIN_RIGHTS_LINK) {
+		ADMIN_RIGHTS_LINK = aDMIN_RIGHTS_LINK;
+	}
+
 	public String getUSER_HOME_LINK() {
 		return USER_HOME_LINK;
+	}
+
+	public String getADMIN_ADD_RIGHT_LINK() {
+		return ADMIN_ADD_RIGHT_LINK;
+	}
+
+	public void setADMIN_ADD_RIGHT_LINK(String aDMIN_ADD_RIGHT_LINK) {
+		ADMIN_ADD_RIGHT_LINK = aDMIN_ADD_RIGHT_LINK;
 	}
 
 	public void setUSER_HOME_LINK(String uSER_HOME_LINK) {

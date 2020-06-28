@@ -63,7 +63,7 @@ CREATE TABLE `identityroleresource` (
   CONSTRAINT `FK_IDENTITYROLERESOURCES_ROLE` FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
 
-insert into organization(organizationName,cui) values 
+insert into managementsystem.organization(organizationName,cui) values 
 ('IBM','34318904'),
 ('Atos','98066608'),
 ('Waters','26167770'),
@@ -72,21 +72,27 @@ insert into organization(organizationName,cui) values
 ('Trimble','40820074'),
 ('Essensys','59753264');
 
-insert into identity(organizationId,username,email,password,firstName,lastName) values
+insert into managementsystem.identity(organizationId,username,email,password,firstName,lastName) values
 (1,'admin','admin@outlook.com','admin','admin','admin'),
 (7,'lucianbrezaiu','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu');
 
-insert into role(roleName,roleDescription) values
+insert into managementsystem.role(roleName,roleDescription) values
 ('idp_admin','administrator of identity mangement system'),
 ('idp_member','member of identity mangement system');
 
-insert into resource(resourceName) values 
+insert into managementsystem.right(rightName,rightDescription) values
+('create_organisations','create organisations in identity system'),
+('create_resources','create resources in identity system'),
+('create_roles','create roles in identity system'),
+('create_rights','create rights in identity system');
+
+insert into managementsystem.resource(resourceName) values 
 ('Dox'),
 ('Intranet'),
 ('Condica Online'),
 ('Identity Management System');
 
-insert into identityroleresource(identityId,roleId,resourceId) values 
+insert into managementsystem.identityroleresource(identityId,roleId,resourceId) values 
 (1,1,4),
 (2,2,4);
 

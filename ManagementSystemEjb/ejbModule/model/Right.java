@@ -10,7 +10,9 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name = "\"Right\"")
 @NamedQuery(name="Right.findAll", query="SELECT r FROM Right r")
+@NamedQuery(name = "findRightByName", query = "SELECT r FROM Right r WHERE r.rightName = :name")
 public class Right implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +31,11 @@ public class Right implements Serializable {
 	public Right() {
 	}
 
+	public Right(String rightName, String rightDescription) {
+		this.rightName = rightName;
+		this.rightDescription = rightDescription;
+	}
+	
 	public int getRightId() {
 		return this.rightId;
 	}

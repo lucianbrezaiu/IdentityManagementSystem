@@ -7,7 +7,7 @@
 	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Admin module - add resource</title>
+	<title>Admin module - add right</title>
 	<link 
 		rel="stylesheet" 
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
@@ -24,9 +24,9 @@
 		   <ul class="nav float-left">
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Home"/></li>
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ORGANIZATIONS_LINK}" value="Organizations"/></li>
-		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
+		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_RESOURCES_LINK}" value="Resources"/></li>
 		     <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_ROLES_LINK}" value="Roles"/></li>
-		      <li class="nav-item"><h:link class="btn btn-outline-light mx-2 border" outcome="#{linksBean.ADMIN_RIGHTS_LINK}" value="Rights"/></li>
+		     <li class="nav-item"><h:link class="btn btn-light mx-2 border" outcome="#{linksBean.ADMIN_RIGHTS_LINK}" value="Rights"/></li>
 		   </ul>
 		   
 		   <div class="float-right" style="margin-right: 45px;">
@@ -51,28 +51,36 @@
 	<div class="container-fluid">
 		<div class="row align-items-center">
 			<div class="col">
-				<h1>Add resource:</h1>
+				<h1>Add right:</h1>
 			</div>
 			<div class="col">
-				<h:link class="btn btn-danger btn-lg" value="BACK" outcome="#{linksBean.ADMIN_RESOURCES_LINK}"/>
+				<h:link class="btn btn-danger btn-lg" value="BACK" outcome="#{linksBean.ADMIN_RIGHTS_LINK}"/>
 			</div>
 		</div>
 	</div>
 
 	<br/>
 	<br/>
-	<h:form label="addResourceForm" class="form">
+	<h:form label="addRightForm" class="form">
 	
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="Name:"/>
 			<h:inputText class="effect-input" required="true" label="Name"
-				placeholder="Name" validatorMessage="Enter resource name"
-				value="#{resourcesBean.resourceDTO.name}"></h:inputText>
+				placeholder="Name" validatorMessage="Enter right name"
+				value="#{rightsBean.rightDTO.name}"></h:inputText>
 			<br />
 		</div>
 		
 		<div class="form-group col-xs-4 col-sm-2">
-			<h:commandButton class="btn btn-dark float-right" value="Add" action="#{resourcesBean.addResource}"></h:commandButton>
+			<h:outputLabel value="Description:"/>
+			<h:inputText class="effect-input" required="true" label="Description"
+				placeholder="Description" validatorMessage="Enter right description"
+				value="#{rightsBean.rightDTO.description}"></h:inputText>
+			<br />
+		</div>
+		
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:commandButton class="btn btn-dark float-right" value="Add" action="#{rightsBean.addRight}"></h:commandButton>
 			<br />
 		</div>
 		
