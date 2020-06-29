@@ -6,6 +6,7 @@
 		<project>ManagementSystemEjb</project>
 		<project>ManagementSystemEjbClient</project>
 		<project>ManagementSystemWeb</project>
+		<project>Intranet</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

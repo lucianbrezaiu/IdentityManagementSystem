@@ -6,13 +6,17 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>NOT AUTHORIZED</title>
-	
+	<title>Intranet - home</title>
+	<link 
+		rel="stylesheet" 
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+		crossorigin="anonymous"
+	/>
 	<h:outputStylesheet library="css" name="styles.css"/>
 </h:head>
 <h:body>
-
-	<h1>NOT AUTHORIZED</h1>
-
+	<h1>Home</h1>
+	#{userBean.getCurrentFullname()}
 </h:body>
 </html>

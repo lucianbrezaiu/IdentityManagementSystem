@@ -6,7 +6,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Management system - Login</title>
+	<title>Intranet - Login</title>
 	<link 
 		rel="stylesheet" 
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
@@ -18,17 +18,13 @@
 <h:body>
 
 	<h:form label="loginForm" class="form">
-		<h1>Welcome to Identity Management System!</h1>
+		<h1>Welcome to Intranet!</h1>
 		<br />
 		<br />
 		<h1>Login:</h1>
 		<br />
 		<br />
-			<div class="form-group col-xs-4 col-sm-2">
-			Or redirect to 
-			<h:link value="Register" outcome="#{linksBean.REGISTER_LINK}"/>
-		</div>
-		
+			
 		<div class="form-group col-xs-4 col-sm-2">
 			<h:outputLabel value="Email:"/>
 			<h:inputText class="form-control" required="true" label="Email"
