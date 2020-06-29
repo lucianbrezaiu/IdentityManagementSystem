@@ -1,5 +1,7 @@
 package bean.userFilter;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -8,8 +10,10 @@ import javax.faces.context.FacesContext;
 import bean.LoginBean;
 import dao.OrganizationDAORemote;
 import dao.resources.IdentitySystemDAORemote;
+import dto.ClaimDTO;
 import dto.IdentityDTO;
 import dto.OrganizationDTO;
+import dto.RoleDTO;
 import util.RoleEnum;
 
 @SuppressWarnings("deprecation")
@@ -45,7 +49,10 @@ public class UserBean {
 	}
 
 	public String getCurrentFullname() {
-		return String.format("%s %s", authenticatedIdentity.getFirstname(), authenticatedIdentity.getLastname());
+		if(authenticatedIdentity!=null) {
+			return String.format("%s %s", authenticatedIdentity.getFirstname(), authenticatedIdentity.getLastname());
+		}
+		return "";
 	}
 
 	public String getCurrentOrganization() {
