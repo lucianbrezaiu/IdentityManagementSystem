@@ -8,6 +8,7 @@ import javax.persistence.*;
  * The persistent class for the identityroleresource database table.
  * 
  */
+@Table(name = "\"identityroleresource\"")
 @Entity
 @NamedQuery(name="Identityroleresource.findAll", query="SELECT i FROM Identityroleresource i")
 @NamedQuery(name="getClaimsForIdentity", query="SELECT i FROM Identityroleresource i WHERE i.identity.identityId = :id")

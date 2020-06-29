@@ -61,9 +61,9 @@ CREATE TABLE `identityroleresource` (
   CONSTRAINT `FK_IDENTITYROLERESOURCES_IDENTITY` FOREIGN KEY (`identityId`) REFERENCES `identity` (`identityId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_IDENTITYROLERESOURCES_RESOURCES` FOREIGN KEY (`resourceId`) REFERENCES `resource` (`resourceId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_IDENTITYROLERESOURCES_ROLE` FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)
+);
 
-
+//seed pentru baza locala:
 
 SET SQL_SAFE_UPDATES = 0;
 delete from managementsystem.identityroleresource;
@@ -110,7 +110,7 @@ insert into managementsystem.right(rightName,rightDescription) values
 ('update','update entities'),
 ('delete','delete entities');
 
-insert into roleright(roleId,rightId) values
+insert into managementsystem.roleright(roleId,rightId) values
 (1,1),
 (1,2),
 (1,3),
@@ -130,6 +130,82 @@ insert into managementsystem.resource(resourceName) values
 ('IdentityManagementSystem');
 
 insert into managementsystem.identityroleresource(identityId,roleId,resourceId) values 
+(1,1,4),
+(1,2,4),
+(2,2,4),
+(2,3,2),
+(2,4,2),
+(3,2,4),
+(4,2,4),
+(5,2,4);
+
+//seed pentru baza din aws:
+
+SET SQL_SAFE_UPDATES = 0;
+delete from managementsystemaws.identityroleresource;
+ALTER TABLE managementsystemaws.identityroleresource AUTO_INCREMENT = 1;
+delete from managementsystemaws.roleright;
+ALTER TABLE managementsystemaws.roleright AUTO_INCREMENT = 1;
+delete from managementsystemaws.right;
+ALTER TABLE managementsystemaws.right AUTO_INCREMENT = 1;
+delete from managementsystemaws.role;
+ALTER TABLE managementsystemaws.role AUTO_INCREMENT = 1;
+delete from managementsystemaws.resource;
+ALTER TABLE managementsystemaws.resource AUTO_INCREMENT = 1;
+delete from managementsystemaws.identity;
+ALTER TABLE managementsystemaws.identity AUTO_INCREMENT = 1;
+delete from managementsystemaws.organization;
+ALTER TABLE managementsystemaws.organization AUTO_INCREMENT = 1;
+
+insert into managementsystemaws.organization(organizationName,cui) values 
+('IBM','34318904'),
+('BCR','98066608'),
+('Waters','26167770'),
+('IQuest','65785470'),
+('Microsoft','21041892'),
+('Essensys','59753264'),
+('Trimble','40820074');
+
+insert into managementsystemaws.identity(organizationId,username,email,password,firstName,lastName) values
+(1,'admin','admin@outlook.com','admin','admin','admin'),
+(6,'lucianbrezaiu#123','lucianbrezaiu@yahoo.com','Copernic@1234','Lucian','Brezaiu'),
+(5,'mari#475','mari@gmail.com','Copernic@1234','Marian','Brezaiu'),
+(3,'andreea#792','andreeau@gmail.com','Copernic@1234','Andreea','Popescu'),
+(3,'bogdan#389','bogdan@gmail.com','Copernic@1234','Bogdan','Sandru');
+
+insert into managementsystemaws.role(roleName,roleDescription) values
+('administrator','administrator of a resource'),
+('member','member of a resource'),
+('hr','hr of a resource'),
+('manager','manager of a resource'),
+('analyst','analyst of a resource');
+
+insert into managementsystemaws.right(rightName,rightDescription) values
+('create','create entities'),
+('read','read entities'),
+('update','update entities'),
+('delete','delete entities');
+
+insert into managementsystemaws.roleright(roleId,rightId) values
+(1,1),
+(1,2),
+(1,3),
+(1,4),
+(2,2),
+(3,1),
+(3,3),
+(3,3),
+(4,2),
+(5,1),
+(5,3);
+
+insert into managementsystemaws.resource(resourceName) values 
+('Dox'),
+('Intranet'),
+('Condica'),
+('IdentityManagementSystem');
+
+insert into managementsystemaws.identityroleresource(identityId,roleId,resourceId) values 
 (1,1,4),
 (1,2,4),
 (2,2,4),

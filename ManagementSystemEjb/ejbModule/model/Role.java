@@ -8,6 +8,8 @@ import java.util.List;
  * The persistent class for the role database table.
  * 
  */
+
+@Table(name = "\"role\"")
 @Entity
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
 @NamedQuery(name = "findRoleById", query = "SELECT r FROM Role r WHERE r.roleId = :id")

@@ -9,6 +9,7 @@ import java.util.List;
  * The persistent class for the resource database table.
  * 
  */
+@Table(name = "\"resource\"")
 @Entity
 @NamedQuery(name="Resource.findAll", query="SELECT r FROM Resource r")
 @NamedQuery(name = "findResourceById", query = "SELECT r FROM Resource r WHERE r.resourceId = :id")

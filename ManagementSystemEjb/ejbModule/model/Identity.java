@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -11,6 +11,7 @@ import java.util.List;
  * The persistent class for the identity database table.
  * 
  */
+@Table(name = "\"identity\"")
 @Entity
 @NamedQuery(name="Identity.findAll", query="SELECT i FROM Identity i")
 @NamedQuery(name = "findIdentityById", query = "SELECT i FROM Identity i WHERE i.identityId = :id")

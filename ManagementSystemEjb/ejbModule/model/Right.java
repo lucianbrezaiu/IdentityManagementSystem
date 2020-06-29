@@ -9,8 +9,9 @@ import java.util.List;
  * The persistent class for the right database table.
  * 
  */
+
+@Table(name = "\"right\"")
 @Entity
-@Table(name = "\"Right\"")
 @NamedQuery(name="Right.findAll", query="SELECT r FROM Right r")
 @NamedQuery(name="findRightById", query="SELECT r FROM Right r WHERE r.rightId = :id")
 @NamedQuery(name = "findRightByName", query = "SELECT r FROM Right r WHERE r.rightName = :name")

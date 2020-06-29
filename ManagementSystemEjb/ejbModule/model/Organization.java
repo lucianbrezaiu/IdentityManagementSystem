@@ -3,12 +3,12 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
-import javax.persistence.CascadeType;
 
 /**
  * The persistent class for the organization database table.
  * 
  */
+@Table(name = "\"organization\"")
 @Entity
 @NamedQuery(name="Organization.findAll", query="SELECT o FROM Organization o")
 @NamedQuery(name = "findOrganizationByCUI", query = "SELECT o FROM Organization o WHERE o.cui = :cui")
