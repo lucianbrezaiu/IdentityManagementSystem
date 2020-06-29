@@ -30,6 +30,7 @@ public class EntityToDTO {
 
 	public ResourceDTO convertResource(Resource resource) {
 		ResourceDTO resourceDTO = new ResourceDTO(resource.getResourceName());
+		resourceDTO.setId(resource.getResourceId());
 		return resourceDTO;
 	}
 

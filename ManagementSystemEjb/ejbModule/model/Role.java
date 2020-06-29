@@ -10,6 +10,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+@NamedQuery(name = "findRoleById", query = "SELECT r FROM Role r WHERE r.roleId = :id")
 @NamedQuery(name = "findRoleByName", query = "SELECT r FROM Role r WHERE r.roleName = :name")
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;

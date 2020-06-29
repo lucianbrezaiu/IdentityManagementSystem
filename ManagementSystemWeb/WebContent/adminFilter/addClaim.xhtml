@@ -54,6 +54,32 @@
 	<br/>
 	<h:form label="addClaimForm" class="form">
 	
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="Identity:"/>
+			<h:selectOneMenu required="true" class="form-control" label="Identities" value="#{adminClaimsBean.newClaimDTO.identityId}">
+				<f:selectItems value="#{adminClaimsBean.getIdentities()}" var="identity" itemValue="#{identity.id}" itemLabel="#{identity.email}"/>
+			</h:selectOneMenu>
+		</div>
+		
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="Resource:"/>
+			<h:selectOneMenu required="true" class="form-control" label="Identities" value="#{adminClaimsBean.newClaimDTO.resourceId}">
+				<f:selectItems value="#{adminClaimsBean.getResources()}" var="res" itemValue="#{res.id}" itemLabel="#{res.name}"/>
+			</h:selectOneMenu>
+		</div>
+		
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:outputLabel value="Role:"/>
+			<h:selectOneMenu required="true" class="form-control" label="Roles" value="#{adminClaimsBean.newClaimDTO.roleId}">
+				<f:selectItems value="#{adminClaimsBean.getRoles()}" var="role" itemValue="#{role.id}" itemLabel="#{role.name}"/>
+			</h:selectOneMenu>
+		</div>
+	
+		<div class="form-group col-xs-4 col-sm-2">
+			<h:commandButton class="btn btn-dark float-right" value="Add" action="#{adminClaimsBean.addClaim}"></h:commandButton>
+			<br />
+		</div>
+	
 		<!-- h:messages is used to display error messages from the current facesContext  -->
 		<h:messages infoStyle="color:darkgreen" errorStyle="color:darkred"></h:messages>
 	</h:form>

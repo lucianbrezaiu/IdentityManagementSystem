@@ -11,10 +11,15 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import dto.ClaimDTO;
+import dto.NewClaimDTO;
 import model.Identity;
 import model.Identityroleresource;
+import model.Resource;
+import model.Role;
 import util.DTOToEntity;
 import util.EntityToDTO;
+import util.ResourceEnum;
+import util.RoleEnum;
 
 @Stateless
 @LocalBean
@@ -40,7 +45,7 @@ static final Logger LOGGER = Logger.getLogger(IdentityDAO.class.getName());
 
 	@Override
 	public List<ClaimDTO> findAll() {
-		Query query = entityManager.createQuery("SELECT claim FROM Identityroleresource claim");
+		Query query =  entityManager.createNamedQuery("Identityroleresource.findAll", Identityroleresource.class);
 		@SuppressWarnings("unchecked")
 		List<Identityroleresource> claims = query.getResultList();
 		List<ClaimDTO> claimsDTO = new ArrayList<>();
@@ -80,6 +85,38 @@ static final Logger LOGGER = Logger.getLogger(IdentityDAO.class.getName());
 	public void delete(int id) {
 		Identityroleresource claim = entityManager.find(Identityroleresource.class, id);
 		entityManager.remove(claim);
+	}
+	
+	@Override
+	public void createFromNewClaimDTO(NewClaimDTO newClaimDTO) {
+		Identity identity = entityManager.createNamedQuery("findIdentityById", Identity.class)
+				.setParameter("id", newClaimDTO.getIdentityId()).getSingleResult();
+
+		Resource resource = entityManager.createNamedQuery("findResourceById", Resource.class)
+				.setParameter("id", newClaimDTO.getResourceId()).getSingleResult();
 		
+		Role role = entityManager.createNamedQuery("findRoleById", Role.class)
+				.setParameter("id", newClaimDTO.getRoleId()).getSingleResult();
+		
+		Identityroleresource claim = new Identityroleresource(identity,role,resource);
+		entityManager.persist(claim);
+		entityManager.flush();
+	}
+	
+	@Override
+	public boolean exist(int identityId, int resourceId, int roleId) {
+		Query query =  entityManager.createNamedQuery("Identityroleresource.findAll", Identityroleresource.class);
+		@SuppressWarnings("unchecked")
+		List<Identityroleresource> claims = query.getResultList();
+		
+		for (Identityroleresource claim : claims) {
+			int dbIdentityId = claim.getIdentity().getIdentityId();
+			int dbResourceId = claim.getResource().getResourceId();
+			int dbRoleId = claim.getRole().getRoleId();
+			if(dbIdentityId==identityId && dbResourceId==resourceId && dbRoleId==roleId) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
