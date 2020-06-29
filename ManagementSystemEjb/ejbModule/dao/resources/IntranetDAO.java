@@ -1,5 +1,6 @@
 package dao.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -7,9 +8,14 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import dao.IdentityDAO;
+import dto.ClaimDTO;
+import model.Identity;
 import model.Identityroleresource;
+import util.DTOToEntity;
+import util.EntityToDTO;
 import util.ResourceEnum;
 import util.RoleEnum;
 
@@ -21,29 +27,26 @@ public class IntranetDAO implements IntranetDAORemote {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	private EntityToDTO entityToDTO;
 	
 	public IntranetDAO() {
-	}
-
-	public boolean hasRoleInIntranet(int identityId, RoleEnum role) {
-		try {
-			List<Identityroleresource> claims = entityManager
-					.createNamedQuery("getClaimsForIdentity", Identityroleresource.class)
-					.setParameter("id", identityId)
-					.getResultList();
-			
-			for (Identityroleresource claim : claims) {
-				String dbRole = claim.getRole().getRoleName().trim();
-				String resourceName = claim.getResource().getResourceName().trim();
-				if(dbRole.equals(role.name()) && resourceName.equals(ResourceEnum.Intranet.name())) {
-					return true;
-				}
-			}
-			return false;
-		}
-		catch(Exception e) {
-			return false;
-		}
+		entityToDTO = new EntityToDTO();
 	}
 	
+	@Override
+	public List<ClaimDTO> getRolesForAuthenticatedUser(int identityId){
+		
+		Query query =  entityManager.createNamedQuery("Identityroleresource.findAll", Identityroleresource.class);
+		@SuppressWarnings("unchecked")
+		List<Identityroleresource> claims = query.getResultList();
+		List<ClaimDTO> claimsDTO = new ArrayList<>();
+		for (Identityroleresource claim : claims) {
+			int dbIdentityId = claim.getIdentity().getIdentityId();
+			String resourceName = claim.getResource().getResourceName();
+			if(dbIdentityId==identityId && resourceName.equals(ResourceEnum.Intranet.name())) {
+				claimsDTO.add(entityToDTO.convertClaim(claim));
+			}
+		}
+		return claimsDTO;
+	}
 }

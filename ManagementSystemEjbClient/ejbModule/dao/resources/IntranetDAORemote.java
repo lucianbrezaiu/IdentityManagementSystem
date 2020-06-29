@@ -1,12 +1,15 @@
 package dao.resources;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
+import dto.ClaimDTO;
 import util.RoleEnum;
 
 @Remote
 public interface IntranetDAORemote {
 
-	boolean hasRoleInIntranet(int identityId, RoleEnum role);
+	List<ClaimDTO> getRolesForAuthenticatedUser(int identityId);
 	
 }
