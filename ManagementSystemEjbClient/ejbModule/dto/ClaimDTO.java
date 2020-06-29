@@ -12,7 +12,6 @@ public class ClaimDTO {
 		
 	}
 
-	
 	public ClaimDTO(String identityEmail, String roleName, String roleDescription, String resourceName) {
 		super();
 		this.identityEmail = identityEmail;
