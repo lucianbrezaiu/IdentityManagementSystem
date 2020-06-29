@@ -34,16 +34,6 @@
 		   		<div class="username">
 			   		<h:link class="username" outcome="#{linksBean.USER_HOME_LINK}" value="#{userBean.getCurrentFullname()}"/>
 			    </div>
-			 	<div id="dropDownList" class="btn-group">
-			        <a id="dropdown" class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="background-color: white">
-			            <span class="glyphicon glyphicon-user"></span>
-			        </a>
-			        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				        <h:form>
-				        	<h:commandButton class="dropdown-item" value="Logout" action="#{loginBean.logout}"></h:commandButton>
-				        </h:form>
-			       	</div>
-			    </div>
 			</div>
 		</div>
 	</b:navBar>

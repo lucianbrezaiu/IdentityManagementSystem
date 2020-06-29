@@ -7,7 +7,7 @@
 	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Admin module - Claims</title>
+	<title>Admin module - add claim</title>
 	<link 
 		rel="stylesheet" 
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
@@ -15,7 +15,6 @@
 		crossorigin="anonymous"
 	/>
 	<h:outputStylesheet library="css" name="styles.css"/>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/> 
 	<h:outputStylesheet library="css" name="adminFilter.css"/>
 </h:head>
 <h:body>
@@ -35,58 +34,29 @@
 		   		<div class="username">
 			   		<h:link class="username" outcome="#{linksBean.USER_HOME_LINK}" value="#{userBean.getCurrentFullname()}"/>
 			    </div>
-			 	<div id="dropDownList" class="btn-group">
-			        <a id="dropdown" class="btn dropdown-toggle" data-toggle="dropdown" href="#" style="background-color: white">
-			            <span class="glyphicon glyphicon-user"></span>
-			        </a>
-			        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			        	<h:panelGroup rendered="#{userBean.isAdmin()}">
-						    <h:link class="dropdown-item" outcome="#{linksBean.ADMIN_HOME_LINK}" value="Administrator"/>
-						</h:panelGroup>
-				        <h:form>
-				        	<h:commandButton class="dropdown-item" value="Logout" action="#{loginBean.logout}"></h:commandButton>
-				        </h:form>
-			       	</div>
-			    </div>
 			</div>
 		</div>
 	</b:navBar>
 	
+	<br/>
 	<div class="container-fluid">
 		<div class="row align-items-center">
 			<div class="col">
-				<h1>Claims</h1>
+				<h1>Add claim:</h1>
 			</div>
 			<div class="col">
-				<h:link class="btn btn-danger btn-lg" value="Add claim" outcome="#{linksBean.ADMIN_ADD_CLAIM_LINK}"/>
+				<h:link class="btn btn-danger btn-lg" value="BACK" outcome="#{linksBean.ADMIN_CLAIMS_LINK}"/>
 			</div>
 		</div>
 	</div>
+
+	<br/>
+	<br/>
+	<h:form label="addClaimForm" class="form">
 	
-	<h:dataTable value="#{adminClaimsBean.getClaims()}" var="claim" styleClass="table table-hover table-striped">
-		<h:column>    				
-	      <f:facet name = "header">Identity</f:facet>    				
-	      #{claim.identityEmail}
-	   </h:column>
-	    <h:column>    				
-	      <f:facet name = "header">Resource</f:facet>    				
-	      #{claim.resourceName}
-	   </h:column>
-	   <h:column>    				
-	      <f:facet name = "header">Role name</f:facet>    				
-	      #{claim.roleName}
-	   </h:column>
-	   <h:column>    				
-	     <f:facet name = "header">Action</f:facet>   
-	     <h:form class="form">
-			<h:commandButton rendered="#{userBean.authenticatedIdentity.email != claim.identityEmail}" class="btn btn-success" value="Delete" 
-										      		action="#{adminClaimsBean.deleteClaim(claim.id)}">
-			</h:commandButton>
-	     </h:form>
-	   </h:column>
-	</h:dataTable>
+		<!-- h:messages is used to display error messages from the current facesContext  -->
+		<h:messages infoStyle="color:darkgreen" errorStyle="color:darkred"></h:messages>
+	</h:form>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </h:body>
 </html>

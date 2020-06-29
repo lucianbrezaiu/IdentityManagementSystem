@@ -34,6 +34,8 @@ public class LinksBean {
 	
 	private String ADMIN_CLAIMS_LINK = "/adminFilter/claims.xhtml?faces-redirect=true";
 	
+	private String ADMIN_ADD_CLAIM_LINK = "/adminFilter/addClaim.xhtml?faces-redirect=true";
+	
 	private String USER_HOME_LINK = "/userFilter/home.xhtml?faces-redirect=true";
 
 	private String USER_CLAIMS_LINK = "/userFilter/claims.xhtml?faces-redirect=true";
@@ -130,10 +132,6 @@ public class LinksBean {
 		ADMIN_RIGHTS_LINK = aDMIN_RIGHTS_LINK;
 	}
 
-	public String getUSER_HOME_LINK() {
-		return USER_HOME_LINK;
-	}
-
 	public String getADMIN_ADD_RIGHT_LINK() {
 		return ADMIN_ADD_RIGHT_LINK;
 	}
@@ -150,6 +148,18 @@ public class LinksBean {
 		ADMIN_CLAIMS_LINK = aDMIN_CLAIMS_LINK;
 	}
 
+	public String getADMIN_ADD_CLAIM_LINK() {
+		return ADMIN_ADD_CLAIM_LINK;
+	}
+
+	public void setADMIN_ADD_CLAIM_LINK(String aDMIN_ADD_CLAIM_LINK) {
+		ADMIN_ADD_CLAIM_LINK = aDMIN_ADD_CLAIM_LINK;
+	}
+
+	public String getUSER_HOME_LINK() {
+		return USER_HOME_LINK;
+	}
+	
 	public void setUSER_HOME_LINK(String uSER_HOME_LINK) {
 		USER_HOME_LINK = uSER_HOME_LINK;
 	}
