@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -7,13 +9,17 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dao.IdentityDAORemote;
+import dao.resources.IntranetDAORemote;
+import dto.ClaimDTO;
 import dto.IdentityDTO;
 import dto.LoginDTO;
+import dto.RoleDTO;
 import exception.LoginException;
+import util.RoleEnum;
 @SuppressWarnings("deprecation")
 @ManagedBean
 @SessionScoped
-public class LoginBean {
+public class IntranetLoginBean {
 
 	private IdentityDTO identityDTO;
 	private LoginDTO loginDTO;
@@ -21,7 +27,10 @@ public class LoginBean {
 	@EJB
 	private IdentityDAORemote identityDAORemote;
 	
-	public LoginBean() {
+	@EJB
+	private IntranetDAORemote intranetDAORemote;
+	
+	public IntranetLoginBean() {
 		loginDTO = new LoginDTO();
 	}
 
@@ -47,9 +56,16 @@ public class LoginBean {
 		try {
 			//identityDTO is the current identity and it is called is UserBean, that's why it is initialized here
 			identityDTO = identityDAORemote.loginIdentity(loginDTO);
-			facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
-			loginDTO = new LoginDTO();
-			return "/home.xhtml?faces-redirect=true";
+			
+			List<ClaimDTO> claims = intranetDAORemote.getRolesForAuthenticatedUser(identityDTO.getId());
+			for (ClaimDTO claimDTO : claims) {
+				if(claimDTO.getRoleName().equals(RoleEnum.member.name())) {
+					facesContext.getExternalContext().getSessionMap().put("identityDTO", identityDTO);
+					loginDTO = new LoginDTO();
+					return "/home.xhtml?faces-redirect=true";
+				}
+			}
+			throw new LoginException();
 		} catch (LoginException e) {
 			// help: facesContext.addMessage afiseaza mesage de eroare in elementul html: <h:messages></h:messages>
 			facesContext.addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.message(), null));

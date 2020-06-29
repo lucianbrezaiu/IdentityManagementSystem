@@ -4,14 +4,14 @@ import javax.faces.context.FacesContext;
 
 import dto.IdentityDTO;
 
-public class UserBean {
+public class IntranetHomeBean {
 
 	private IdentityDTO authenticatedIdentity;
 	
-	public UserBean() {
+	public IntranetHomeBean() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
-		LoginBean loginBean = (LoginBean) facesContext.getExternalContext().getSessionMap().get("loginBean");
+		IntranetLoginBean loginBean = (IntranetLoginBean) facesContext.getExternalContext().getSessionMap().get("loginBean");
 		if (loginBean != null && loginBean.getIdentityDTO() != null) {
 			authenticatedIdentity = loginBean.getIdentityDTO();
 		} 
@@ -28,6 +28,4 @@ public class UserBean {
 	public String getCurrentFullname() {
 		return String.format("%s %s", authenticatedIdentity.getFirstname(), authenticatedIdentity.getLastname());
 	}
-	
-	
 }
