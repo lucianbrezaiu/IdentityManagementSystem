@@ -16,6 +16,11 @@ Aplicație java enterprise cu următoarea arhitectură:
 	- tip proiect: Dynamic Web Project
 	- reprezintă partea de client a aplicației
 	- este adăugat ca referință a proiectului ear
+5. Intranet
+	- tip proiect: Dynamic Web Project
+	- reprezintă un alt client web care se folosește de baza de date a aplicației de management
+	- cu alte cuvinte o resursă la care userii pot cere acces prin aplicația IdentityManagementSystem (cea formată din primele 4 proiecte)
+	- este adăugat ca referință a proiectului
 	
 Pași pentru a rula proiectul:
 1. deschid folderul ce conține proiectele în eclipse
