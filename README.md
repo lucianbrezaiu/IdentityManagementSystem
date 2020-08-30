@@ -24,8 +24,7 @@ Aplicație java enterprise cu următoarea arhitectură:
 	
 Pași pentru a rula proiectul:
 1. deschid folderul ce conține proiectele în eclipse:
-	Eclipse -> File -> Open Projects from File System or Archive -> Directory -> deschid folderul mare ->
-	Select Folder -> Finish
+	Eclipse -> File -> Open Projects from File System or Archive -> Directory -> deschid folderul ManagementSystem -> Select Folder -> Finish
 2. click dreapta pe proiectul ear
 3. Run as -> Run on server
 4. selectez serverul Glassfish care a fost anterior configurat în eclipse
